@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ControlFlowComponent } from './control-flow.component';
+import { ControlFlowIfComponent } from './control-flow-if.component';
 
-describe('ControlFlowComponent', () => {
-  let component: ControlFlowComponent;
-  let fixture: ComponentFixture<ControlFlowComponent>;
+describe('ControlFlowIfComponent', () => {
+  let component: ControlFlowIfComponent;
+  let fixture: ComponentFixture<ControlFlowIfComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ControlFlowComponent]
+      imports: [ControlFlowIfComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ControlFlowComponent);
+    fixture = TestBed.createComponent(ControlFlowIfComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

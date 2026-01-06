@@ -18,8 +18,12 @@ export const routes: Routes = [
         loadComponent: () => import('./features/component-composition/component-composition.component').then(m => m.ComponentCompositionComponent),
     },
     {
-        path: 'control-flow',
-        loadComponent: () => import('./features/control-flow/control-flow.component').then(m => m.ControlFlowComponent),
+        path: 'control-flow-if',
+        loadComponent: () => import('./features/control-flow-if/control-flow-if.component').then(m => m.ControlFlowIfComponent),
+    },
+    {
+        path: 'control-flow-for',
+        loadComponent: () => import('./features/control-flow-for/control-flow-for.component').then(m => m.ControlFlowForComponent),
     },
     { path: '**', redirectTo: '' }
 ];

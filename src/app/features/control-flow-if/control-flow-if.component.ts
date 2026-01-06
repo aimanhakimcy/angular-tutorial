@@ -4,10 +4,10 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-control-flow',
   imports: [CommonModule],
-  templateUrl: './control-flow.component.html',
-  styleUrl: './control-flow.component.css'
+  templateUrl: './control-flow-if.component.html',
+  styleUrl: './control-flow-if.component.css'
 })
-export class ControlFlowComponent {
+export class ControlFlowIfComponent {
 
   isServerRunning = true;
   isLoggedIn = true;

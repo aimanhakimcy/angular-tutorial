@@ -1,0 +1,626 @@
+<!-- user-list.component.html -->
+<div class="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 p-4 md:p-8">
+  
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          🔄 Control Flow with &#64;for
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Learn how to repeat elements in Angular templates using &#64;for loops
+        </p>
+      </div>
+      
+      <!-- Tutorial Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        
+        <!-- Left Column: Basic @for Examples -->
+        <div class="lg:col-span-2">
+          
+          <!-- Demo Card 1: Basic @for Syntax -->
+          <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+            <div class="flex items-center mb-6">
+              <div class="text-3xl mr-4">🎯</div>
+              <div>
+                <h2 class="text-2xl font-bold text-gray-800">Basic &#64;for Syntax</h2>
+                <p class="text-gray-600">The foundation of looping in templates</p>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Code Example -->
+              <div class="bg-gray-900 rounded-xl p-5">
+                <div class="flex items-center text-white mb-4">
+                  <div class="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                  <h3 class="font-semibold">TypeScript Array</h3>
+                </div>
+                <pre class="text-sm text-gray-300 overflow-x-auto">
+  // Component Class
+  users = [
+    {{ '{' }} id: 0, name: 'Sarah' {{ '}' }},
+    {{ '{' }} id: 1, name: 'Amy' {{ '}' }},
+    {{ '{' }} id: 2, name: 'Rachel' {{ '}' }},
+    {{ '{' }} id: 3, name: 'Jessica' {{ '}' }},
+    {{ '{' }} id: 4, name: 'Poornima' {{ '}' }}
+  ];
+                </pre>
+                
+                <div class="mt-6">
+                  <div class="flex items-center text-white mb-4">
+                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                    <h3 class="font-semibold">HTML Template with &#64;for</h3>
+                  </div>
+                  <pre class="text-sm text-gray-300 overflow-x-auto">
+  &lt;!-- Basic &#64;for loop --&gt;
+  &#64;for (user of users; track user.id) {{ '{' }}
+    &lt;p&gt;{{ '{{ user.name }}' }}&lt;/p&gt;
+  {{ '}' }}
+  
+  &lt;!-- With index --&gt;
+  &#64;for (user of users; track user.id; let i = $index) {{ '{' }}
+    &lt;p&gt;{{ '{{ i + 1 }}' }}. {{ '{{ user.name }}' }}&lt;/p&gt;
+  {{ '}' }}
+                  </pre>
+                </div>
+              </div>
+              
+              <!-- Live Demo -->
+              <div>
+                <div class="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl p-5 border border-blue-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Live Demo: User List</h3>
+                  
+                  <!-- Simple List -->
+                  <div class="mb-6">
+                    <h4 class="font-bold text-gray-700 mb-3">Simple User List:</h4>
+                    <div class="space-y-2">
+                      @for (user of users; track user.id) {
+                        <div class="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-200">
+                          <div class="flex items-center">
+                            <span class="text-2xl mr-3">{{ user.avatar }}</span>
+                            <span class="font-medium">{{ user.name }}</span>
+                          </div>
+                          <span class="text-sm text-gray-500">{{ user.role }}</span>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                  
+                  <!-- Numbered List -->
+                  <div>
+                    <h4 class="font-bold text-gray-700 mb-3">Numbered List with Index:</h4>
+                    <div class="space-y-2">
+                      @for (user of users; track user.id; let i = $index) {
+                        <div class="flex items-center bg-white p-3 rounded-lg border border-gray-200">
+                          <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3">
+                            {{ i + 1 }}
+                          </span>
+                          <span class="font-medium">{{ user.name }}</span>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Demo Card 2: @for with Track By -->
+          <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+            <div class="flex items-center mb-6">
+              <div class="text-3xl mr-4">🎯</div>
+              <div>
+                <h2 class="text-2xl font-bold text-gray-800">The Importance of "track"</h2>
+                <p class="text-gray-600">Why tracking is required and how it works</p>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Explanation -->
+              <div class="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-200">
+                <h3 class="font-bold text-gray-800 mb-4">Why Track By?</h3>
+                
+                <div class="space-y-4">
+                  <div class="flex items-start">
+                    <span class="bg-purple-100 text-purple-600 rounded-lg p-2 mr-3">⚡</span>
+                    <div>
+                      <h4 class="font-bold text-gray-800">Performance</h4>
+                      <p class="text-sm text-gray-600">Helps Angular identify which items have changed</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <span class="bg-green-100 text-green-600 rounded-lg p-2 mr-3">🔄</span>
+                    <div>
+                      <h4 class="font-bold text-gray-800">Minimal DOM Updates</h4>
+                      <p class="text-sm text-gray-600">Only updates changed items, not the entire list</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <span class="bg-blue-100 text-blue-600 rounded-lg p-2 mr-3">🎯</span>
+                    <div>
+                      <h4 class="font-bold text-gray-800">Required Syntax</h4>
+                      <p class="text-sm text-gray-600">&#64;for always needs a track expression</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- What to track -->
+                <div class="mt-6">
+                  <h4 class="font-bold text-gray-800 mb-3">Good Track Candidates:</h4>
+                  <div class="grid grid-cols-2 gap-2">
+                    <span class="bg-white text-center py-2 rounded-lg text-sm">✅ Unique ID</span>
+                    <span class="bg-white text-center py-2 rounded-lg text-sm">✅ Index ($index)</span>
+                    <span class="bg-white text-center py-2 rounded-lg text-sm">❌ Non-unique name</span>
+                    <span class="bg-white text-center py-2 rounded-lg text-sm">❌ Random number</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Comparison Demo -->
+              <div class="bg-linear-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-200">
+                <h3 class="font-bold text-gray-800 mb-4">Live Comparison</h3>
+                
+                <!-- OS Example from Tutorial -->
+                <div class="mb-6">
+                  <h4 class="font-bold text-gray-700 mb-3">Operating Systems:</h4>
+                  <div class="space-y-2">
+                    @for (os of operatingSystems; track os.id) {
+                      <div class="flex items-center justify-between bg-white p-3 rounded-lg border border-amber-200">
+                        <div class="flex items-center">
+                          <span class="text-2xl mr-3">{{ os.icon }}</span>
+                          <div>
+                            <div class="font-bold">{{ os.name }}</div>
+                            <div class="text-xs text-gray-500">Version {{ os.version }}</div>
+                          </div>
+                        </div>
+                        <span class="text-sm font-medium text-amber-600">{{ os.marketShare }}% share</span>
+                      </div>
+                    }
+                  </div>
+                </div>
+                
+                <!-- Add/Remove Demo -->
+                <div>
+                  <h4 class="font-bold text-gray-700 mb-3">Try It: Add/Remove Users</h4>
+                  <div class="space-y-3">
+                    <!-- Add Form -->
+                    <div class="flex gap-2 mb-4">
+                      <input 
+                        [(ngModel)]="newUserName"
+                        placeholder="Enter user name"
+                        class="flex-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      <button 
+                        (click)="addUser()"
+                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors">
+                        Add
+                      </button>
+                    </div>
+                    
+                    <!-- User Cards -->
+                    <div class="space-y-2 max-h-60 overflow-y-auto">
+                      @for (user of users; track user.id) {
+                        <div class="flex items-center justify-between bg-white p-3 rounded-lg border border-gray-200">
+                          <div class="flex items-center">
+                            <span class="text-2xl mr-3">{{ user.avatar }}</span>
+                            <span class="font-medium">{{ user.name }}</span>
+                            <span [class]="getStatusColor(user.status) + ' text-xs font-medium px-2 py-1 rounded-full ml-3'">
+                              {{ user.status }}
+                            </span>
+                          </div>
+                          <button 
+                            (click)="removeUser(user.id)"
+                            class="text-red-500 hover:text-red-700">
+                            Remove
+                          </button>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Demo Card 3: Advanced @for Features -->
+          <div class="bg-white rounded-2xl shadow-xl p-6">
+            <div class="flex items-center mb-6">
+              <div class="text-3xl mr-4">🚀</div>
+              <div>
+                <h2 class="text-2xl font-bold text-gray-800">Advanced &#64;for Features</h2>
+                <p class="text-gray-600">$index, $first, $last, $even, $odd, and &#64;empty</p>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              
+              <!-- Special Variables Demo -->
+              <div class="space-y-6">
+                
+                <!-- Tasks with Special Variables -->
+                <div class="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Special Loop Variables</h3>
+                  
+                  <div class="space-y-3">
+                    @for (task of tasks; track task.id; let i = $index; let first = $first; let last = $last; let even = $even) {
+                      <div [class]="'p-4 rounded-lg border ' + (even ? 'bg-white/50' : 'bg-white') + ' ' + (first ? 'border-green-300' : 'border-gray-200')">
+                        <div class="flex items-center justify-between">
+                          <div class="flex items-center">
+                            <!-- Index Badge -->
+                            <span class="w-8 h-8 rounded-full bg-green-100 text-green-800 flex items-center justify-center text-sm font-bold mr-3">
+                              {{ i + 1 }}
+                            </span>
+                            
+                            <div>
+                              <div class="font-bold">{{ task.title }}</div>
+                              <div class="text-sm text-gray-600">Assigned to {{ task.assignee }}</div>
+                            </div>
+                          </div>
+                          
+                          <div class="flex items-center space-x-3">
+                            <!-- Priority Badge -->
+                            <span [class]="getPriorityColor(task.priority) + ' text-xs font-medium px-2 py-1 rounded-full'">
+                              {{ task.priority }}
+                            </span>
+                            
+                            <!-- Status Toggle -->
+                            <button 
+                              (click)="toggleTaskCompletion(task.id)"
+                              [class]="task.completed ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-300 hover:bg-gray-400'"
+                              class="w-6 h-6 rounded-full transition-colors flex items-center justify-center">
+                              <span class="text-white text-xs">{{ task.completed ? '✓' : '' }}</span>
+                            </button>
+                          </div>
+                        </div>
+                        
+                        <!-- First/Last Indicators -->
+                        <div class="flex justify-between mt-2 text-xs text-gray-500">
+                          @if (first) {
+                            <span class="text-green-600 font-medium">👆 First task</span>
+                          }
+                          @if (last) {
+                            <span class="text-blue-600 font-medium">👇 Last task</span>
+                          }
+                          <span>{{ even ? 'Even row' : 'Odd row' }}</span>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+                
+                <!-- Products Grid -->
+                <div class="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl p-5 border border-blue-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Products Grid</h3>
+                  
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    @for (product of products; track product.id; let even = $even) {
+                      <div [class]="'bg-white p-4 rounded-xl border ' + (even ? 'border-blue-300' : 'border-gray-200')">
+                        <div class="flex justify-between items-start mb-3">
+                          <h4 class="font-bold text-gray-800">{{ product.name }}</h4>
+                          <span class="text-lg font-bold text-blue-600">${{ product.price }}</span>
+                        </div>
+                        
+                        <div class="text-sm text-gray-600 mb-3">{{ product.category }}</div>
+                        
+                        <div class="flex justify-between items-center">
+                          <div class="flex items-center">
+                            <span class="text-yellow-500 mr-1">⭐</span>
+                            <span class="font-medium">{{ product.rating }}</span>
+                          </div>
+                          
+                          <div class="text-sm">
+                            <span [class]="product.stock < 20 ? 'text-red-600' : 'text-green-600'">
+                              {{ product.stock }} in stock
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+              
+              <!-- @empty and Filtering Demo -->
+              <div class="space-y-6">
+                
+                <!-- Filter Controls -->
+                <div class="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Filter Users</h3>
+                  
+                  <div class="grid grid-cols-2 gap-4 mb-6">
+                    <!-- Status Filter -->
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                      <select 
+                        [(ngModel)]="filterStatus"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="away">Away</option>
+                        <option value="busy">Busy</option>
+                      </select>
+                    </div>
+                    
+                    <!-- Role Filter -->
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
+                      <select 
+                        [(ngModel)]="filterRole"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        <option value="all">All Roles</option>
+                        <option value="developer">Developer</option>
+                        <option value="designer">Designer</option>
+                        <option value="manager">Manager</option>
+                        <option value="engineer">Engineer</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                  <!-- Statistics -->
+                  <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-white rounded-lg p-3 text-center">
+                      <div class="text-2xl font-bold text-purple-600">{{ totalUsers }}</div>
+                      <div class="text-sm text-gray-600">Total Users</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-3 text-center">
+                      <div class="text-2xl font-bold text-green-600">{{ activeUsers }}</div>
+                      <div class="text-sm text-gray-600">Active Users</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Filtered Results with @empty -->
+                <div class="bg-linear-to-br from-indigo-50 to-blue-50 rounded-xl p-5 border border-indigo-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Filtered Results</h3>
+                  
+                  <!-- Filtered Users List -->
+                  <div class="space-y-3">
+                    @for (user of filteredUsers; track user.id) {
+                      <div class="flex items-center justify-between bg-white p-4 rounded-lg border border-gray-200">
+                        <div class="flex items-center">
+                          <span class="text-2xl mr-3">{{ user.avatar }}</span>
+                          <div>
+                            <div class="font-bold">{{ user.name }}</div>
+                            <div class="text-sm text-gray-600">{{ user.role }}</div>
+                          </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-3">
+                          <span [class]="getStatusColor(user.status) + ' text-xs font-medium px-3 py-1 rounded-full'">
+                            {{ user.status }}
+                          </span>
+                          
+                          <button 
+                            (click)="toggleUserStatus(user.id)"
+                            class="text-blue-500 hover:text-blue-700 text-sm">
+                            Change Status
+                          </button>
+                        </div>
+                      </div>
+                    }
+                    
+                    <!-- @empty block -->
+                    @empty {
+                      <div class="text-center py-8">
+                        <div class="text-4xl mb-4">🔍</div>
+                        <h4 class="font-bold text-gray-800 mb-2">No Users Found</h4>
+                        <p class="text-gray-600 mb-4">Try changing your filter criteria</p>
+                        <button 
+                          (click)="filterStatus = 'all'; filterRole = 'all'"
+                          class="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg">
+                          Reset Filters
+                        </button>
+                      </div>
+                    }
+                  </div>
+                </div>
+                
+                <!-- @empty Example -->
+                <div class="bg-linear-to-br from-red-50 to-orange-50 rounded-xl p-5 border border-red-200">
+                  <h3 class="font-bold text-gray-800 mb-4">&#64;empty Block Example</h3>
+                  
+                  <div class="space-y-4">
+                    <!-- Empty List Example -->
+                    <div>
+                      <h4 class="font-medium text-gray-700 mb-2">Empty Orders List:</h4>
+                      <div class="bg-white rounded-lg border border-gray-200 p-4">
+                        @for (item of []; track $index) {
+                          <div>Item {{ item }}</div>
+                        } @empty {
+                          <div class="text-center py-4">
+                            <span class="text-gray-500">📭 No orders yet. Start shopping!</span>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                    
+                    <!-- Non-empty List Example -->
+                    <div>
+                      <h4 class="font-medium text-gray-700 mb-2">Tasks Status:</h4>
+                      <div class="bg-white rounded-lg border border-gray-200 p-4">
+                        @for (task of completedTasks; track task.id) {
+                            <div class="flex items-center mb-2">
+                            <span class="text-green-500 mr-2">✓</span>
+                            <span class="text-gray-700">{{ task.title }}</span>
+                          </div>
+                        } @empty {
+                          <div class="text-center py-4">
+                            <span class="text-gray-500">No completed tasks yet</span>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Column: Reference & Practice -->
+        <div>
+          
+          <!-- Syntax Reference Card -->
+          <div class="bg-linear-to-br from-cyan-50 to-blue-50 rounded-2xl shadow-xl p-6 mb-8 border border-cyan-200">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">📚 &#64;for Syntax Reference</h3>
+            
+            <div class="space-y-4">
+              <div class="bg-white rounded-lg p-3">
+                <h4 class="font-bold text-blue-800 mb-2">Basic &#64;for</h4>
+                <pre class="text-xs bg-blue-50 p-2 rounded">
+&#64;for (item of items; track item.id) {{ '{' }}
+    &lt;!-- Content --&gt;
+  {{ '}' }}
+                </pre>
+              </div>
+              
+              <div class="bg-white rounded-lg p-3">
+                <h4 class="font-bold text-blue-800 mb-2">With Index</h4>
+                <pre class="text-xs bg-blue-50 p-2 rounded">
+&#64;for (item of items; track item.id; 
+        let i = $index) {{ '{' }}
+    &lt;p&gt;{{ '{{ i + 1 }}' }}. {{ '{{ item.name }}' }}&lt;/p&gt;
+  {{ '}' }}
+                </pre>
+              </div>
+              
+              <div class="bg-white rounded-lg p-3">
+                <h4 class="font-bold text-blue-800 mb-2">Special Variables</h4>
+                <pre class="text-xs bg-blue-50 p-2 rounded">
+&#64;for (item of items; track item.id; 
+        let i = $index;
+        let first = $first;
+        let last = $last;
+        let even = $even;
+        let odd = $odd) {{ '{' }}
+    &lt;!-- Use variables --&gt;
+  {{ '}' }}
+                </pre>
+              </div>
+              
+              <div class="bg-white rounded-lg p-3">
+                <h4 class="font-bold text-blue-800 mb-2">&#64;empty Block</h4>
+                <pre class="text-xs bg-blue-50 p-2 rounded">
+&#64;for (item of items; track item.id) {{ '{' }}
+    &lt;!-- List items --&gt;
+  {{ '}' }} &#64;empty {{ '{' }}
+    &lt;p&gt;No items found&lt;/p&gt;
+  {{ '}' }}
+                </pre>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Practice Card -->
+          <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">💪 Practice Area</h3>
+            
+            <div class="space-y-6">
+              <!-- Challenge 1 -->
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h4 class="font-bold text-gray-800 mb-2">Challenge 1: Create Numbered List</h4>
+                <p class="text-sm text-gray-600 mb-3">Display numbers 1-5 using &#64;for:</p>
+                
+                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                  @for (num of [1,2,3,4,5]; track $index) {
+                    <div class="flex items-center mb-2">
+                      <span class="w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3">
+                        {{ num }}
+                      </span>
+                      <span>Item number {{ num }}</span>
+                    </div>
+                  }
+                </div>
+              </div>
+              
+              <!-- Challenge 2 -->
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h4 class="font-bold text-gray-800 mb-2">Challenge 2: Zebra Striping</h4>
+                <p class="text-sm text-gray-600 mb-3">Create alternating row colors:</p>
+                
+                <div class="space-y-2">
+                  @for (user of users.slice(0, 3); track user.id; let even = $even) {
+                    <div [class]="'p-3 rounded-lg ' + (even ? 'bg-gray-100' : 'bg-white') + ' border border-gray-200'">
+                      <div class="flex items-center">
+                        <span class="text-xl mr-3">{{ user.avatar }}</span>
+                        <span>{{ user.name }}</span>
+                        <span class="ml-auto text-sm text-gray-500">
+                          {{ even ? 'Even row' : 'Odd row' }}
+                        </span>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+              
+              <!-- Challenge 3 -->
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h4 class="font-bold text-gray-800 mb-2">Challenge 3: Empty State</h4>
+                <p class="text-sm text-gray-600 mb-3">Practice &#64;empty with empty array:</p>
+                
+                <div class="bg-white border border-gray-200 rounded-lg p-4">
+                  @for (item of []; track $index) {
+                    <div>Item {{ item }}</div>
+                  } @empty {
+                    <div class="text-center py-6">
+                      <div class="text-3xl mb-2">📋</div>
+                      <p class="text-gray-600">Your list is empty</p>
+                      <p class="text-sm text-gray-500">Add some items to get started</p>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Old vs New Syntax -->
+          <div class="bg-gray-800 rounded-2xl shadow-xl p-6">
+            <h3 class="text-xl font-bold text-white mb-4">🆚 Old vs New Syntax</h3>
+            
+            <div class="space-y-6">
+              <div>
+                <h4 class="font-semibold text-gray-300 mb-2">Old Syntax (v16 and earlier)</h4>
+                <div class="bg-gray-900 rounded-lg p-4">
+                  <pre class="text-xs text-gray-400">
+  &lt;div *ngFor="let user of users; 
+              index as i; 
+              trackBy: trackByFn"&gt;
+    &lt;p&gt;{{ '{{ i + 1 }}' }}. {{ '{{ user.name }}' }}&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;div *ngIf="users.length === 0"&gt;
+    No users found
+  &lt;/div&gt;
+                  </pre>
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="font-semibold text-gray-300 mb-2">New Syntax (v17+)</h4>
+                <div class="bg-gray-900 rounded-lg p-4">
+                  <pre class="text-xs text-gray-300">
+&#64;for (user of users; track user.id; 
+        let i = $index) {{ '{' }}
+    &lt;p&gt;{{ '{{ i + 1 }}' }}. {{ '{{ user.name }}' }}&lt;/p&gt;
+  {{ '}' }} &#64;empty {{ '{' }}
+    &lt;p&gt;No users found&lt;/p&gt;
+  {{ '}' }}
+                  </pre>
+                </div>
+              </div>
+              
+              <div class="text-sm text-gray-300">
+                <p class="mb-2"><span class="font-bold text-green-400">✅ Advantages:</span></p>
+                <ul class="space-y-1 ml-4">
+                  <li>• Built-in &#64;empty block</li>
+                  <li>• Better TypeScript support</li>
+                  <li>• Required track improves performance</li>
+                  <li>• More intuitive syntax</li>
+                  <li>• Special variables as let bindings</li>
+                </ul>
+            </div>
