@@ -29,5 +29,9 @@ export const routes: Routes = [
         path: 'property-binding',
         loadComponent: () => import('./features/property-binding/property-binding.component').then(m => m.PropertyBindingComponent),
     },
+    {
+        path: 'event-handling',
+        loadComponent: () => import('./features/event-handling/event-handling.component').then(m => m.EventHandlingComponent),
+    },
     { path: '**', redirectTo: '' }
 ];

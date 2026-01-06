@@ -1,0 +1,647 @@
+<!-- event-handling.component.html -->
+<div class="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 p-4 md:p-8">
+  
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          🎮 Event Handling in Angular
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Learn how to handle user interactions using (parentheses) event binding
+        </p>
+      </div>
+      
+      <!-- Tutorial Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        
+        <!-- Left Column: Core Concepts & Examples -->
+        <div class="lg:col-span-2">
+          
+          <!-- Demo Card 1: Basic Event Binding -->
+          <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+            <div class="flex items-center mb-6">
+              <div class="text-3xl mr-4">🎯</div>
+              <div>
+                <h2 class="text-2xl font-bold text-gray-800">Basic Event Binding</h2>
+                <p class="text-gray-600">The foundation of user interaction</p>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Code Example -->
+              <div class="bg-gray-900 rounded-xl p-5">
+                <div class="flex items-center text-white mb-4">
+                  <div class="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                  <h3 class="font-semibold">TypeScript Event Handlers</h3>
+                </div>
+                <pre class="text-sm text-gray-300 overflow-x-auto">
+  export class EventHandlingComponent {{ '{' }}
+    clickCount = 0;
+    message = 'Hello!';
+    
+    handleClick() {{ '{' }}
+      this.clickCount++;
+      this.message = `Clicked ${{ '{' }}this.clickCount{{ '}' }} times!`;
+    {{ '}' }}
+  {{ '}' }}
+                </pre>
+                
+                <div class="mt-6">
+                  <div class="flex items-center text-white mb-4">
+                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                    <h3 class="font-semibold">HTML Template with Event Binding</h3>
+                  </div>
+                  <pre class="text-sm text-gray-300 overflow-x-auto">
+  &lt;!-- Click event --&gt;
+  &lt;button (click)="handleClick()"&gt;
+    Click me!
+  &lt;/button&gt;
+  
+  &lt;!-- Mouseover event --&gt;
+  &lt;section (mouseover)="showSecretMessage()"&gt;
+    Hover over me!
+  &lt;/section&gt;
+  
+  &lt;!-- Display result --&gt;
+  &lt;p&gt;{{ '{{ message }}' }}&lt;/p&gt;
+                  </pre>
+                </div>
+              </div>
+              
+              <!-- Live Demo -->
+              <div class="space-y-6">
+                
+                <!-- Click Event Demo -->
+                <div class="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl p-5 border border-blue-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Click Event Demo</h3>
+                  
+                  <div class="text-center mb-6">
+                    <button 
+                      (click)="handleClick()"
+                      class="bg-linear-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold text-lg py-4 px-8 rounded-xl transition-all duration-200 transform hover:-translate-y-1 active:translate-y-0 shadow-lg hover:shadow-xl">
+                      🎯 Click Me!
+                    </button>
+                    
+                    <div class="mt-4">
+                      <div class="text-2xl font-bold text-blue-600">{{ clickCount }}</div>
+                      <div class="text-sm text-gray-600">Total Clicks</div>
+                    </div>
+                  </div>
+                  
+                  <p class="text-center text-gray-700">{{ message }}</p>
+                </div>
+                
+                <!-- Mouseover Event Demo -->
+                <div class="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Mouseover Event Demo</h3>
+                  
+                  <div 
+                    (mouseover)="handleHover()"
+                    (mouseleave)="resetHover()"
+                    class="min-h-36 flex flex-col items-center justify-center border-2 border-dashed border-green-300 rounded-xl p-6 transition-all duration-300 hover:border-green-500 hover:bg-green-50/50 cursor-pointer">
+                    
+                    <div class="text-4xl mb-4">
+                      {{ hoverCount > 0 ? '🎉' : '✨' }}
+                    </div>
+                    
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">
+                      Hover Over This Section
+                    </h4>
+                    
+                    <p class="text-gray-600 text-center">
+                      {{ secretRevealed ? 'You found the secret!' : 'Move your mouse here to reveal a secret message!' }}
+                    </p>
+                    
+                    <div class="mt-4 text-center">
+                      <div class="text-lg font-bold text-green-600">{{ hoverCount }}</div>
+                      <div class="text-sm text-gray-600">Hover Count</div>
+                    </div>
+                  </div>
+                  
+                  <button 
+                    (click)="resetHover()"
+                    class="w-full mt-4 bg-linear-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium py-3 rounded-lg transition-colors">
+                    Reset Hover Counter
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Demo Card 2: Keyboard & Input Events -->
+          <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+            <div class="flex items-center mb-6">
+              <div class="text-3xl mr-4">⌨️</div>
+              <div>
+                <h2 class="text-2xl font-bold text-gray-800">Keyboard & Input Events</h2>
+                <p class="text-gray-600">Handle typing, key presses, and form interactions</p>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              
+              <!-- Keyboard Events -->
+              <div class="space-y-6">
+                
+                <!-- Key Press Tracking -->
+                <div class="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Keyboard Events</h3>
+                  
+                  <input 
+                    (keypress)="handleKeyPress($event)"
+                    placeholder="Type here to track key presses..."
+                    class="w-full border border-gray-300 rounded-lg px-4 py-3 mb-4 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                  
+                  <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                      <span class="text-gray-700">Last Key Pressed:</span>
+                      <span class="font-bold text-purple-600">
+                        {{ lastKeyPressed || 'None yet' }}
+                      </span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                      <span class="text-gray-700">Total Key Presses:</span>
+                      <span class="text-xl font-bold text-purple-600">{{ keyPressCount }}</span>
+                    </div>
+                    
+                    @if (keyCombo) {
+                      <div class="flex justify-between items-center">
+                        <span class="text-gray-700">Special Combo:</span>
+                        <span class="font-bold text-pink-600">{{ keyCombo }}</span>
+                      </div>
+                    }
+                  </div>
+                  
+                  <div class="mt-4 text-sm text-gray-600">
+                    <p>💡 Try these shortcuts:</p>
+                    <ul class="ml-4 mt-1 space-y-1">
+                      <li>• <code>Ctrl + S</code> - Save shortcut</li>
+                      <li>• <code>Alt + Enter</code> - Alternative enter</li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <!-- Input Events -->
+                <div class="bg-linear-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Input Events</h3>
+                  
+                  <input 
+                    [value]="inputValue"
+                    (input)="handleInput($event)"
+                    placeholder="Type something..."
+                    class="w-full border border-gray-300 rounded-lg px-4 py-3 mb-4 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                  
+                  <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                      <span class="text-gray-700">Current Value:</span>
+                      <span class="font-bold text-amber-600">
+                        {{ inputValue || 'Empty' }}
+                      </span>
+                    </div>
+                    
+                    <div class="text-sm text-gray-600">
+                      <p>🔍 This input uses debouncing (300ms delay)</p>
+                      <p class="mt-1">Check the message above after stopping typing</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Form Events -->
+              <div class="space-y-6">
+                
+                <!-- Form Submission -->
+                <div class="bg-linear-to-br from-indigo-50 to-blue-50 rounded-xl p-5 border border-indigo-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Form Events</h3>
+                  
+                  <form 
+                    (submit)="handleSubmit($event)"
+                    class="space-y-4">
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Username
+                      </label>
+                      <input 
+                        [(ngModel)]="username"
+                        name="username"
+                        placeholder="Enter username"
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Email
+                      </label>
+                      <input 
+                        [(ngModel)]="email"
+                        name="email"
+                        type="email"
+                        placeholder="Enter email"
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    
+                    <div class="flex items-center">
+                      <input 
+                        [(ngModel)]="rememberMe"
+                        name="rememberMe"
+                        type="checkbox"
+                        id="rememberMe"
+                        class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+                      <label for="rememberMe" class="ml-2 text-gray-700">
+                        Remember me
+                      </label>
+                    </div>
+                    
+                    <button 
+                      type="submit"
+                      class="w-full bg-linear-to-r from-indigo-500 to-blue-500 hover:from-indigo-600 hover:to-blue-600 text-white font-bold py-3 rounded-lg transition-all duration-200 transform hover:-translate-y-0.5">
+                      📝 Submit Form
+                    </button>
+                  </form>
+                  
+                  <div class="mt-4 text-center">
+                    <div class="text-2xl font-bold text-indigo-600">{{ formSubmitCount }}</div>
+                    <div class="text-sm text-gray-600">Form Submissions</div>
+                  </div>
+                </div>
+                
+                <!-- Mouse Position Tracker -->
+                <div class="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Mouse Position Tracking</h3>
+                  
+                  <div 
+                    (mousemove)="handleMouseMove($event)"
+                    (mouseenter)="handleMouseEnter()"
+                    (mouseleave)="handleMouseLeave()"
+                    class="min-h-32 border-2 border-dashed border-green-300 rounded-xl flex items-center justify-center bg-green-50/50 cursor-crosshair">
+                    
+                    <div class="text-center">
+                      <div class="text-2xl mb-2">🖱️</div>
+                      <p class="text-gray-700">Move mouse here</p>
+                    </div>
+                  </div>
+                  
+                  <div class="grid grid-cols-2 gap-4 mt-4">
+                    <div class="text-center">
+                      <div class="text-lg font-bold text-green-600">{{ mouseX }}</div>
+                      <div class="text-sm text-gray-600">X Position</div>
+                    </div>
+                    <div class="text-center">
+                      <div class="text-lg font-bold text-green-600">{{ mouseY }}</div>
+                      <div class="text-sm text-gray-600">Y Position</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Demo Card 3: Advanced Events -->
+          <div class="bg-white rounded-2xl shadow-xl p-6">
+            <div class="flex items-center mb-6">
+              <div class="text-3xl mr-4">🚀</div>
+              <div>
+                <h2 class="text-2xl font-bold text-gray-800">Advanced Events</h2>
+                <p class="text-gray-600">Drag & drop, double click, context menu, and more</p>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Drag & Drop -->
+              <div class="bg-linear-to-br from-red-50 to-pink-50 rounded-xl p-5 border border-red-200">
+                <h3 class="font-bold text-gray-800 mb-4">Drag & Drop Events</h3>
+                
+                <div class="space-y-4">
+                  <!-- Draggable Item -->
+                  <div 
+                    draggable="true"
+                    (dragstart)="handleDragStart($event)"
+                    (dragend)="handleDragEnd()"
+                    [class]="'p-4 rounded-lg border-2 text-center cursor-move transition-all ' + (isDragging ? 'border-red-500 bg-red-100' : 'border-red-300 bg-white')">
+                    
+                    <div class="text-3xl mb-2">📦</div>
+                    <p class="font-medium">Drag me!</p>
+                    <p class="text-sm text-gray-600">Drag to the drop zone</p>
+                  </div>
+                  
+                  <!-- Drop Zone -->
+                  <div 
+                    (dragover)="handleDragOver($event)"
+                    (drop)="handleDrop($event)"
+                    class="min-h-24 border-2 border-dashed border-pink-300 rounded-lg flex items-center justify-center bg-pink-50/50">
+                    
+                    <div class="text-center">
+                      <div class="text-2xl mb-2">🎯</div>
+                      <p class="text-gray-700">Drop Zone</p>
+                    </div>
+                  </div>
+                  
+                  <div class="text-center">
+                    <div class="text-xl font-bold text-red-600">{{ dragCount }}</div>
+                    <div class="text-sm text-gray-600">Successful Drags</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Other Events -->
+              <div class="space-y-6">
+                
+                <!-- Double Click -->
+                <div class="bg-linear-to-br from-purple-50 to-indigo-50 rounded-xl p-5 border border-purple-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Double Click Event</h3>
+                  
+                  <div 
+                    (dblclick)="handleDoubleClick()"
+                    class="min-h-24 border-2 border-dashed border-purple-300 rounded-lg flex items-center justify-center bg-purple-50/50 cursor-pointer hover:bg-purple-50 transition-colors">
+                    
+                    <div class="text-center">
+                      <div class="text-3xl mb-2">✨</div>
+                      <p class="font-medium">Double Click Me!</p>
+                    </div>
+                  </div>
+                  
+                  <div class="text-center mt-4">
+                    <div class="text-xl font-bold text-purple-600">{{ doubleClickCount }}</div>
+                    <div class="text-sm text-gray-600">Double Clicks</div>
+                  </div>
+                </div>
+                
+                <!-- Context Menu -->
+                <div class="bg-linear-to-br from-cyan-50 to-blue-50 rounded-xl p-5 border border-cyan-200">
+                  <h3 class="font-bold text-gray-800 mb-4">Context Menu Event</h3>
+                  
+                  <div 
+                    (contextmenu)="handleContextMenu($event)"
+                    class="min-h-20 border-2 border-dashed border-cyan-300 rounded-lg flex items-center justify-center bg-cyan-50/50 cursor-context-menu">
+                    
+                    <div class="text-center">
+                      <div class="text-2xl mb-2">🎪</div>
+                      <p class="font-medium">Right Click Me!</p>
+                      <p class="text-sm text-gray-600">(Or long press on mobile)</p>
+                    </div>
+                  </div>
+                  
+                  <div class="text-center mt-4">
+                    <div class="text-xl font-bold text-cyan-600">{{ contextMenuCount }}</div>
+                    <div class="text-sm text-gray-600">Custom Context Menus</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Column: Reference & Statistics -->
+        <div>
+          
+          <!-- Syntax Reference Card -->
+          <div class="bg-linear-to-br from-amber-50 to-orange-50 rounded-2xl shadow-xl p-6 mb-8 border border-amber-200">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">📚 Event Binding Syntax</h3>
+            
+            <div class="space-y-4">
+              <div class="bg-white rounded-lg p-3">
+                <h4 class="font-bold text-amber-800 mb-2">Basic Syntax</h4>
+                <pre class="text-xs bg-amber-50 p-2 rounded">
+  &lt;!-- Parentheses syntax --&gt;
+  &lt;element (event)="handler()"&gt;
+  
+  &lt;!-- Examples --&gt;
+  &lt;button (click)="handleClick()"&gt;Click
+  &lt;/button&gt;
+  &lt;div (mouseover)="handleHover()"&gt;Hover
+  &lt;/div&gt;
+  &lt;input 
+  (keypress)="handleKeyPress($event)"&gt;
+                </pre>
+              </div>
+              
+              <div class="bg-white rounded-lg p-3">
+                <h4 class="font-bold text-amber-800 mb-2">Event Object</h4>
+                <pre class="text-xs bg-amber-50 p-2 rounded">
+  &lt;!-- Access event object --&gt;
+  &lt;input 
+  (keypress)="handleKeyPress($event)"&gt;
+  
+  // In TypeScript
+  handleKeyPress(event: KeyboardEvent) {{ '{' }}
+    console.log('Key pressed:', event.key);
+  {{ '}' }}
+                </pre>
+              </div>
+              
+              <div class="bg-white rounded-lg p-3">
+                <h4 class="font-bold text-amber-800 mb-2">Common Events</h4>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                  <span class="bg-amber-100 p-2 rounded">(click)</span>
+                  <span class="bg-amber-100 p-2 rounded">(dblclick)</span>
+                  <span class="bg-amber-100 p-2 rounded">(mouseover)</span>
+                  <span class="bg-amber-100 p-2 rounded">(mouseleave)</span>
+                  <span class="bg-amber-100 p-2 rounded">(keydown)</span>
+                  <span class="bg-amber-100 p-2 rounded">(keyup)</span>
+                  <span class="bg-amber-100 p-2 rounded">(input)</span>
+                  <span class="bg-amber-100 p-2 rounded">(change)</span>
+                  <span class="bg-amber-100 p-2 rounded">(submit)</span>
+                  <span class="bg-amber-100 p-2 rounded">(focus)</span>
+                  <span class="bg-amber-100 p-2 rounded">(blur)</span>
+                  <span class="bg-amber-100 p-2 rounded">(scroll)</span>
+                </div>
+              </div>
+              
+              <div class="bg-white rounded-lg p-3">
+                <h4 class="font-bold text-amber-800 mb-2">Prevent Default</h4>
+                <pre class="text-xs bg-amber-50 p-2 rounded">
+  // Prevent default browser behavior
+  handleContextMenu(event: MouseEvent) {{ '{' }}
+    event.preventDefault(); 
+    // Stop browser context menu
+    // Show custom menu instead
+  {{ '}' }}
+  
+  handleSubmit(event: Event) {{ '{' }}
+    event.preventDefault(); 
+    // Stop form submission
+    // Handle form manually
+  {{ '}' }}
+                </pre>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Event Statistics -->
+          <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">📊 Event Statistics</h3>
+            
+            <div class="space-y-4">
+              <!-- Total Events -->
+              <div class="bg-linear-to-r from-blue-500 to-cyan-500 text-white rounded-xl p-4 text-center">
+                <div class="text-3xl font-bold">{{ totalEvents }}</div>
+                <div class="text-sm">Total Events Triggered</div>
+              </div>
+              
+              <!-- Event Counters -->
+              <div class="space-y-3">
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-700">Click Events:</span>
+                  <span [class]="getEventColor(clickCount) + ' text-xs font-medium px-2 py-1 rounded-full'">
+                    {{ clickCount }}
+                  </span>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-700">Hover Events:</span>
+                  <span [class]="getEventColor(hoverCount) + ' text-xs font-medium px-2 py-1 rounded-full'">
+                    {{ hoverCount }}
+                  </span>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-700">Key Presses:</span>
+                  <span [class]="getEventColor(keyPressCount) + ' text-xs font-medium px-2 py-1 rounded-full'">
+                    {{ keyPressCount }}
+                  </span>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-700">Form Submissions:</span>
+                  <span [class]="getEventColor(formSubmitCount) + ' text-xs font-medium px-2 py-1 rounded-full'">
+                    {{ formSubmitCount }}
+                  </span>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-700">Drag & Drops:</span>
+                  <span [class]="getEventColor(dragCount) + ' text-xs font-medium px-2 py-1 rounded-full'">
+                    {{ dragCount }}
+                  </span>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-700">Double Clicks:</span>
+                  <span [class]="getEventColor(doubleClickCount) + ' text-xs font-medium px-2 py-1 rounded-full'">
+                    {{ doubleClickCount }}
+                  </span>
+                </div>
+              </div>
+              
+              <!-- Reset Button -->
+              <button 
+                (click)="resetAll()"
+                class="w-full bg-linear-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-bold py-3 rounded-lg transition-all duration-200 transform hover:-translate-y-0.5">
+                🔄 Reset All Counters
+              </button>
+            </div>
+          </div>
+          
+          <!-- Event Object Info -->
+          <div class="bg-gray-800 rounded-2xl shadow-xl p-6">
+            <h3 class="text-xl font-bold text-white mb-4">🎯 Event Object Details</h3>
+            
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold text-gray-300 mb-2">Common Event Types</h4>
+                <div class="text-sm text-gray-300 space-y-1">
+                  <p><code>MouseEvent</code> - click, mouseover, mousemove</p>
+                  <p><code>KeyboardEvent</code> - keypress, keydown, keyup</p>
+                  <p><code>FocusEvent</code> - focus, blur</p>
+                  <p><code>DragEvent</code> - dragstart, dragover, drop</p>
+                  <p><code>Event</code> - submit, change, input</p>
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="font-semibold text-gray-300 mb-2">Useful Event Properties</h4>
+                <div class="text-sm text-gray-300 space-y-1">
+                  <p><code>event.target</code> - Element that triggered event</p>
+                  <p><code>event.currentTarget</code> - Element with event listener</p>
+                  <p><code>event.key</code> - Key pressed (KeyboardEvent)</p>
+                  <p><code>event.clientX/Y</code> - Mouse position</p>
+                  <p><code>event.preventDefault()</code> - Stop default action</p>
+                  <p><code>event.stopPropagation()</code> - Stop bubbling</p>
+                </div>
+              </div>
+              
+              <div class="text-sm text-gray-300">
+                <p class="mb-2"><span class="font-bold text-green-400">✅ Best Practices:</span></p>
+                <ul class="space-y-1 ml-4">
+                  <li>• Use <code>$event</code> to access event object</li>
+                  <li>• Type event parameters for TypeScript safety</li>
+                  <li>• Debounce rapid events (scroll, input)</li>
+                  <li>• Prevent default when needed</li>
+                  <li>• Keep handlers simple - call methods</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Common Patterns -->
+      <div class="bg-linear-to-r from-purple-500 to-pink-500 rounded-2xl shadow-xl p-6 md:p-8 mb-12">
+        <h2 class="text-2xl font-bold text-white mb-6">🎨 Common Event Patterns</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+            <div class="text-3xl mb-3">🎯</div>
+            <h3 class="font-bold text-white text-lg mb-2">Simple Click</h3>
+            <p class="text-purple-100">
+              <code>(click)="handleClick()"</code><br>
+              Most common event
+            </p>
+          </div>
+          
+          <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+            <div class="text-3xl mb-3">⌨️</div>
+            <h3 class="font-bold text-white text-lg mb-2">Form Handling</h3>
+            <p class="text-purple-100">
+              <code>(submit)="onSubmit($event)"</code><br>
+              Prevent default, validate, submit
+            </p>
+          </div>
+          
+          <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+            <div class="text-3xl mb-3">🔍</div>
+            <h3 class="font-bold text-white text-lg mb-2">Debouncing</h3>
+            <p class="text-purple-100">
+              Delay rapid events<br>
+              Search, scroll, resize
+            </p>
+          </div>
+          
+          <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+            <div class="text-3xl mb-3">🎮</div>
+            <h3 class="font-bold text-white text-lg mb-2">Keyboard Shortcuts</h3>
+            <p class="text-purple-100">
+              <code>(keydown.ctrl.s)="save()"</code><br>
+              Ctrl+S, Enter, Escape
+            </p>
+          </div>
+        </div>
+        
+        <!-- Real-World Examples -->
+        <div class="mt-8 bg-white/30 backdrop-blur-sm rounded-xl p-5">
+          <h3 class="font-bold text-white text-lg mb-3">🌐 Real-World Examples:</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white/20 rounded-lg p-3">
+              <h4 class="font-bold text-white mb-1">Search Box</h4>
+              <p class="text-purple-100 text-sm"><code>(input)="search($event)"</code> with debouncing</p>
+            </div>
+            <div class="bg-white/20 rounded-lg p-3">
+              <h4 class="font-bold text-white mb-1">Form Validation</h4>
+              <p class="text-purple-100 text-sm"><code>(blur)="validateField()"</code> on field exit</p>
+            </div>
+            <div class="bg-white/20 rounded-lg p-3">
+              <h4 class="font-bold text-white mb-1">Infinite Scroll</h4>
+              <p class="text-purple-100 text-sm"><code>(scroll)="loadMore()"</code> at bottom detection</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
