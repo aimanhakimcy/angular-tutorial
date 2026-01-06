@@ -1,0 +1,178 @@
+<div class="min-h-screen bg-linear-to-r from-gray-50 to-gray-100 p-4 md:p-8">
+
+    <!-- Main Container -->
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+
+        <!-- Header Section -->
+        <div class="bg-linear-to-r from-purple-600 via-purple-500 to-purple-400 p-6 md:p-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                🏗️ {{ componentTitle }}
+            </h1>
+            <p class="text-purple-100 text-lg">
+                Learn how Angular components work - the building blocks of every Angular app
+            </p>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="p-6 md:p-8 border-b border-gray-200">
+            <div class="flex flex-col md:flex-row gap-6 items-center">
+
+                <!-- Message Display Card -->
+                <div class="flex-1 text-center">
+                    <div class="bg-gray-50 rounded-xl p-6 border-2 border-dashed border-gray-300">
+                        <p class="text-2xl font-bold transition-colors duration-300" [style.color]="currentColor">
+                            {{ message }}
+                        </p>
+                        <p class="text-sm text-gray-500 mt-2">
+                            Current color: <span class="font-mono">{{ currentColor }}</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Controls Card -->
+                <div class="flex-1">
+                    <div class="bg-purple-50 rounded-xl p-6 border border-purple-200">
+                        <h3 class="text-lg font-semibold text-purple-800 mb-4">
+                            Try It Yourself:
+                        </h3>
+
+                        <div class="space-y-4">
+                            <!-- <button (click)="updateMessage()"
+                                class="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0">
+                                ✨ Update Message
+                            </button> -->
+
+                            <button (click)="updateColor()"
+                                class="w-full border-2 border-purple-600 text-purple-600 hover:bg-purple-50 font-medium py-3 px-4 rounded-lg transition-all duration-200">
+                                🎨 Change Color
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Three Parts of a Component -->
+        <div class="p-6 md:p-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                📚 The Three Parts of Every Component:
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- TypeScript Class Card -->
+                <div class="bg-gradient-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-xl font-bold text-blue-800 mb-2">
+                        TypeScript Class
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        This is the BRAIN. It contains all the logic, data, and methods that power your component.
+                    </p>
+                    <div class="bg-blue-100 rounded-lg p-3 font-mono text-sm">
+                        data = 'Hello';<br>
+                        updateData() {{ '{...}' }}
+                    </div>
+                </div>
+
+                <!-- HTML Template Card -->
+                <div class="bg-gradient-br from-green-50 to-emerald-50 rounded-xl p-6 border border-green-200">
+                    <div class="text-4xl mb-4">🎨</div>
+                    <h3 class="text-xl font-bold text-green-800 mb-2">
+                        HTML Template
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        This is the FACE. It defines what users see in the browser - your component's visual structure.
+                    </p>
+                    <div class="bg-green-100 rounded-lg p-3 font-mono text-sm">
+                        &lt;div&gt;<br>
+                        &nbsp;&nbsp;{{ '{{ data }}' }}<br>
+                        &lt;/div&gt;
+                    </div>
+                </div>
+
+                <!-- CSS Styles Card -->
+                <div class="bg-gradient-br from-pink-50 to-rose-50 rounded-xl p-6 border border-pink-200">
+                    <div class="text-4xl mb-4">👕</div>
+                    <h3 class="text-xl font-bold text-pink-800 mb-2">
+                        CSS Styles
+                    </h3>
+                    <p class="text-gray-700 mb-4">
+                        These are the CLOTHES. They make your component look beautiful and user-friendly.
+                    </p>
+                    <div class="bg-pink-100 rounded-lg p-3 font-mono text-sm">
+                        :host {{ '{' }}<br>
+                        &nbsp;&nbsp;color: #a144eb;<br>
+                        {{ '}' }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Code Examples Section -->
+        <div class="bg-gray-900 text-gray-100 p-6 md:p-8">
+            <h2 class="text-2xl font-bold mb-6">
+                💻 How It All Fits Together:
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- TypeScript Example -->
+                <div>
+                    <h3 class="text-lg font-semibold text-purple-300 mb-3">
+                        TypeScript (anatomy.component.ts)
+                    </h3>
+                    <div class="bg-gray-800 rounded-lg p-4 overflow-x-auto">
+                        <pre class="text-sm" [innerText]="componentCode"></pre>
+                    </div>
+                </div>
+
+                <!-- HTML Example -->
+                <div>
+                    <h3 class="text-lg font-semibold text-purple-300 mb-3">
+                        HTML Template (anatomy.component.html)
+                    </h3>
+                    <div class="bg-gray-800 rounded-lg p-4 overflow-x-auto">
+                        <pre class="text-sm">
+&lt;div class="bg-white p-6"&gt;
+  &lt;p [style.color]="color"&gt;
+    {{ '{{ message }}' }}
+  &lt;/p&gt;
+  &lt;button (click)="updateMessage()"&gt;
+    Update
+  &lt;/button&gt;
+&lt;/div&gt;
+</pre>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Footer Notes -->
+        <div class="bg-gray-50 p-6 border-t border-gray-200">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div>
+                    <h4 class="font-semibold text-gray-800 mb-2">
+                        ✅ Key Takeaways:
+                    </h4>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Each component has 3 parts: TypeScript + HTML + CSS</li>
+                        <li>• Components are reusable building blocks</li>
+                        <li>• Tailwind makes styling fast and consistent</li>
+                    </ul>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="w-3 h-3 rounded-full bg-purple-500 animate-pulse"></div>
+                    <span class="text-sm text-gray-600">
+                        Interactive demo - Try the buttons above!
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

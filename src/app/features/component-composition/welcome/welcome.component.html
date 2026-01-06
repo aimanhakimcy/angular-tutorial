@@ -1,0 +1,76 @@
+<!-- welcome.component.html -->
+<div class="bg-linear-to-r from-green-50 to-emerald-50 rounded-xl p-6 border-2 border-green-200 shadow-sm">
+  
+    <!-- Header -->
+    <div class="flex items-center mb-4">
+      <div class="text-3xl mr-3">
+        👋
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold text-gray-800">
+          {{ title }}
+        </h2>
+        <p class="text-green-700">
+          Component Composition Tutorial
+        </p>
+      </div>
+    </div>
+    
+    <!-- Welcome Message -->
+    <div class="bg-white rounded-lg p-4 mb-4 border border-green-100">
+      <p class="text-gray-700">
+        {{ message }}
+      </p>
+    </div>
+    
+    <!-- Tips Section (Conditional) -->
+    <div *ngIf="showTips" class="space-y-4">
+      <div class="flex items-center">
+        <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3">
+          <span class="text-green-600 text-sm">💡</span>
+        </div>
+        <h3 class="font-bold text-green-800">Quick Tips for Component Composition:</h3>
+      </div>
+      
+      <ul class="space-y-2 pl-9">
+        <li *ngFor="let tip of tips" class="flex items-start">
+          <span class="text-green-500 mr-2">✓</span>
+          <span class="text-gray-700">{{ tip }}</span>
+        </li>
+      </ul>
+      
+      <!-- Component Diagram -->
+      <div class="mt-4 bg-green-100/50 rounded-lg p-4 border border-green-200">
+        <div class="text-center mb-2 text-sm text-green-800 font-medium">
+          Component Structure:
+        </div>
+        <div class="flex justify-center items-center space-x-2">
+          <div class="text-center">
+            <div class="bg-white border-2 border-green-400 rounded-lg p-2 text-sm">
+              App Component
+            </div>
+            <div class="text-xs text-gray-500 mt-1">Parent</div>
+          </div>
+          <div class="text-green-500">→</div>
+          <div class="text-center">
+            <div class="bg-white border border-green-300 rounded-lg p-2 text-sm">
+              Child Components
+            </div>
+            <div class="text-xs text-gray-500 mt-1">Reusable</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Additional Info -->
+    <div class="mt-6 pt-4 border-t border-green-200 flex justify-between items-center">
+      <div class="text-sm text-gray-600">
+        <span class="font-medium">Remember:</span> Components are like Lego blocks!
+      </div>
+      <div class="flex space-x-2">
+        <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+        <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+        <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+      </div>
+    </div>
+  </div>

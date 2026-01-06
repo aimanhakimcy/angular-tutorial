@@ -1,0 +1,89 @@
+<!-- counter.component.html -->
+<div class="bg-linear-to-r from-yellow-50 to-orange-50 rounded-xl p-5 border-2 border-yellow-200 shadow-sm">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center">
+            <div class="text-2xl mr-3">
+                🔢
+            </div>
+            <div>
+                <h3 class="font-bold text-gray-800">
+                    {{ label }}
+                </h3>
+                <p class="text-xs text-gray-600">Interactive Counter Component</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="space-y-3">
+        <!-- Value Display -->
+        <div class="bg-white rounded-lg p-4 border border-yellow-200">
+            <div class="flex gap-2 items-center">
+                <span class="text-gray-700 font-medium">Current Value:</span>
+                <span class="text-2xl font-bold text-yellow-600">{{ currentValue }}</span>
+            </div>
+            <div class="mt-2 text-center">
+                <div class="inline-block bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">
+                    {{ currentValue | i18nPlural: {'=0': 'Zero', '=1': 'One', 'other': '#'} }} item{{ currentValue !== 1
+                    ? 's' : '' }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="grid grid-cols-3 gap-2">
+            <button (click)="decrement()" [disabled]="currentValue === 0" [class]="currentValue === 0 
+            ? 'bg-gray-200 text-gray-400 cursor-not-allowed' 
+            : 'bg-red-500 hover:bg-red-600 text-white transform hover:-translate-y-0.5'"
+                class="rounded-lg p-3 font-bold transition-all duration-200 active:translate-y-0">
+                ➖ Decrement
+            </button>
+
+            <button (click)="reset()"
+                class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg p-3 font-bold transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0">
+                🔄 Reset
+            </button>
+
+            <button (click)="increment()"
+                class="bg-green-500 hover:bg-green-600 text-white rounded-lg p-3 font-bold transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0">
+                ➕ Increment
+            </button>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="flex space-x-2 mt-4">
+            <button (click)="setTo(5)"
+                class="flex-1 bg-blue-100 hover:bg-blue-200 text-blue-700 text-sm py-2 rounded-lg transition-colors">
+                Set to 5
+            </button>
+
+            <button (click)="setTo(10)"
+                class="flex-1 bg-purple-100 hover:bg-purple-200 text-purple-700 text-sm py-2 rounded-lg transition-colors">
+                Set to 10
+            </button>
+
+            <button (click)="double()"
+                class="flex-1 bg-pink-100 hover:bg-pink-200 text-pink-700 text-sm py-2 rounded-lg transition-colors">
+                Double It
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-6 pt-4 border-t border-yellow-200">
+        <div class="text-xs text-gray-600 text-center">
+            <span class="font-medium">Component Event:</span>
+            Value changes emit to parent component
+        </div>
+        <div class="flex justify-center mt-2">
+            <div class="flex space-x-1">
+                <div *ngFor="let i of [0,1,2,3,4]" class="w-2 h-2 rounded-full"
+                    [class.bg-yellow-400]="i < (currentValue % 5)" [class.bg-yellow-200]="i >= (currentValue % 5)">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
