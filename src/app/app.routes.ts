@@ -25,5 +25,9 @@ export const routes: Routes = [
         path: 'control-flow-for',
         loadComponent: () => import('./features/control-flow-for/control-flow-for.component').then(m => m.ControlFlowForComponent),
     },
+    {
+        path: 'property-binding',
+        loadComponent: () => import('./features/property-binding/property-binding.component').then(m => m.PropertyBindingComponent),
+    },
     { path: '**', redirectTo: '' }
 ];

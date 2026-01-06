@@ -1,0 +1,608 @@
+<!-- property-binding.component.html -->
+<div class="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 p-4 md:p-8">
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                🔗 Property Binding in Angular
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Learn how to dynamically set HTML element properties using [square brackets]
+            </p>
+        </div>
+
+        <!-- Tutorial Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+
+            <!-- Left Column: Core Concepts & Examples -->
+            <div class="lg:col-span-2">
+
+                <!-- Demo Card 1: Basic Property Binding -->
+                <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                    <div class="flex items-center mb-6">
+                        <div class="text-3xl mr-4">🎯</div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Basic Property Binding</h2>
+                            <p class="text-gray-600">The foundation of dynamic properties</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <!-- Code Example -->
+                        <div class="bg-gray-900 rounded-xl p-5">
+                            <div class="flex items-center text-white mb-4">
+                                <div class="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                                <h3 class="font-semibold">TypeScript Properties</h3>
+                            </div>
+                            <pre class="text-sm text-gray-300 overflow-x-auto">
+  export class PropertyBindingComponent {{ '{' }}
+    // Basic properties
+    isEditable = true;
+    isDisabled = false;
+    inputValue = 'Edit me!';
+    imageURL = '...';
+  {{ '}' }}
+                </pre>
+
+                            <div class="mt-6">
+                                <div class="flex items-center text-white mb-4">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <h3 class="font-semibold">HTML Template with Binding</h3>
+                                </div>
+                                <pre class="text-sm text-gray-300 overflow-x-auto">
+  &lt;!-- contentEditable binding --&gt;
+  &lt;div [contentEditable]="isEditable"&gt;
+    Edit this text
+  &lt;/div&gt;
+  
+  &lt;!-- disabled binding --&gt;
+  &lt;button [disabled]="isDisabled"&gt;
+    Click me
+  &lt;/button&gt;
+  
+  &lt;!-- value binding --&gt;
+  &lt;input [value]="inputValue"&gt;
+  
+  &lt;!-- src binding --&gt;
+  &lt;img [src]="imageURL" [alt]="imageAlt"&gt;
+                  </pre>
+                            </div>
+                        </div>
+
+                        <!-- Live Demo -->
+                        <div class="space-y-6">
+
+                            <!-- Editable Div Example -->
+                            <div class="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl p-5 border border-blue-200">
+                                <h3 class="font-bold text-gray-800 mb-4">contentEditable Binding</h3>
+
+                                <div class="mb-4">
+                                    <div class="flex items-center mb-2">
+                                        <span class="text-sm text-gray-600">Property: </span>
+                                        <span
+                                            [class]="'ml-2 px-3 py-1 rounded-full text-sm font-medium ' + (isEditable ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800')">
+                                            isEditable = {{ isEditable }}
+                                        </span>
+                                    </div>
+
+                                    <!-- The editable div -->
+                                    <div [contentEditable]="isEditable" [style]="editableDivStyles"
+                                        class="min-h-28 p-4 border-2 border-dashed border-blue-300 focus:outline-none focus:border-blue-500 transition-colors">
+                                        <p>✨ This div is {{ isEditable ? 'editable' : 'not editable' }}!</p>
+                                        <p>Try
+                                            {{ isEditable ? 'editing this text' : 'enabling editing to modify this text'
+                                            }}.</p>
+                                        <p>All styles are bound dynamically!</p>
+                                    </div>
+                                </div>
+
+                                <button (click)="toggleEditable()"
+                                    class="w-full bg-linear-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200">
+                                    {{ isEditable ? '🔒 Make Read-Only' : '✏️ Make Editable' }}
+                                </button>
+                            </div>
+
+                            <!-- Button State Example -->
+                            <div
+                                class="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
+                                <h3 class="font-bold text-gray-800 mb-4">Button State Binding</h3>
+
+                                <div class="mb-4">
+                                    <div class="flex items-center mb-2">
+                                        <span class="text-sm text-gray-600">Property: </span>
+                                        <span
+                                            [class]="'ml-2 px-3 py-1 rounded-full text-sm font-medium ' + (isDisabled ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800')">
+                                            isDisabled = {{ isDisabled }}
+                                        </span>
+                                    </div>
+
+                                    <button [disabled]="isDisabled" [style]="buttonStyles"
+                                        class="w-full py-3 px-4 font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                                        {{ isDisabled ? '🔒 Button Disabled' : '✅ Click Me!' }}
+                                    </button>
+                                </div>
+
+                                <button (click)="toggleDisabled()"
+                                    class="w-full bg-linear-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200">
+                                    {{ isDisabled ? '✅ Enable Button' : '🔒 Disable Button' }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demo Card 2: Image & Media Binding -->
+                <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                    <div class="flex items-center mb-6">
+                        <div class="text-3xl mr-4">🖼️</div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Image & Media Binding</h2>
+                            <p class="text-gray-600">Dynamic media sources and attributes</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <!-- Image Binding -->
+                        <div class="space-y-6">
+
+                            <!-- Single Image Binding -->
+                            <div
+                                class="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-200">
+                                <h3 class="font-bold text-gray-800 mb-4">Image Property Binding</h3>
+
+                                <div class="mb-4">
+                                    <img [src]="imageURL" [alt]="imageAlt"
+                                        class="w-full h-48 object-cover rounded-lg border-2 border-purple-300">
+
+                                    <div class="mt-3 text-center">
+                                        <p class="text-sm font-medium text-gray-700">{{ imageAlt }}</p>
+                                        <p class="text-xs text-gray-500 truncate">{{ imageURL }}</p>
+                                    </div>
+                                </div>
+
+                                <button (click)="changeImage()"
+                                    class="w-full bg-linear-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200">
+                                    🔄 Change Image
+                                </button>
+                            </div>
+
+                            <!-- Video Binding -->
+                            <div
+                                class="bg-linear-to-br from-indigo-50 to-blue-50 rounded-xl p-5 border border-indigo-200">
+                                <h3 class="font-bold text-gray-800 mb-4">Video Property Binding</h3>
+
+                                <video [src]="videoURL" controls class="w-full rounded-lg border-2 border-indigo-300">
+                                    Your browser does not support the video tag.
+                                </video>
+
+                                <div class="mt-3 text-sm text-gray-600">
+                                    <span class="font-medium">Bound Properties:</span>
+                                    <p class="text-xs mt-1">[src]="videoURL"</p>
+                                    <p class="text-xs">controls (boolean attribute)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gallery with Binding -->
+                        <div class="bg-linear-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-200">
+                            <h3 class="font-bold text-gray-800 mb-4">Image Gallery with Binding</h3>
+
+                            <div class="grid grid-cols-2 gap-3 mb-6">
+                                @for (image of galleryImages; track image.id) {
+                                <div (click)="currentImageIndex = image.id - 1; changeImage()"
+                                    [class]="'cursor-pointer rounded-lg overflow-hidden border-2 ' + (currentImageIndex === image.id - 1 ? 'border-blue-500' : 'border-gray-200')">
+                                    <img [src]="image.url" [alt]="image.title" class="w-full h-24 object-cover">
+                                    <p class="text-xs text-center p-2 truncate">{{ image.title }}</p>
+                                </div>
+                                }
+                            </div>
+
+                            <div class="text-sm text-gray-700">
+                                <div class="font-medium mb-2">Bound in Gallery:</div>
+                                <ul class="space-y-1 text-xs text-gray-600">
+                                    <li>• <code>[src]="image.url"</code> - Image source</li>
+                                    <li>• <code>[alt]="image.title"</code> - Alt text</li>
+                                    <li>• <code>[class]</code> - Dynamic border color</li>
+                                    <li>• <code>(click)</code> - Event binding (next tutorial!)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demo Card 3: Form & Input Binding -->
+                <div class="bg-white rounded-2xl shadow-xl p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="text-3xl mr-4">📝</div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Form & Input Binding</h2>
+                            <p class="text-gray-600">Dynamic form controls and attributes</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <!-- Input Controls -->
+                        <div class="space-y-6">
+
+                            <!-- Text Input -->
+                            <div
+                                class="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
+                                <h3 class="font-bold text-gray-800 mb-4">Text Input Binding</h3>
+
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Bound Value:</label>
+                                        <input [value]="inputValue" [placeholder]="placeholderText"
+                                            [attr.maxlength]="maxLength" [(ngModel)]="currentValue"
+                                            class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500">
+
+                                        <div class="flex justify-between mt-2 text-sm text-gray-600">
+                                            <span>Current: "{{ inputValue }}"</span>
+                                            <span>{{ inputValue.length }}/{{ maxLength }}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <button (click)="inputValue = 'Hello Angular!'"
+                                            class="bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition-colors">
+                                            Set "Hello Angular!"
+                                        </button>
+                                        <button (click)="inputValue = ''"
+                                            class="bg-gray-500 hover:bg-gray-600 text-white py-2 rounded-lg transition-colors">
+                                            Clear
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Checkbox & Radio -->
+                            <div class="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl p-5 border border-blue-200">
+                                <h3 class="font-bold text-gray-800 mb-4">Checkbox Binding</h3>
+
+                                <div class="space-y-4">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" [checked]="isChecked" (change)="toggleChecked()"
+                                            id="exampleCheckbox"
+                                            class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500">
+                                        <label for="exampleCheckbox" class="ml-3 text-gray-700">
+                                            Checkbox is {{ isChecked ? 'checked' : 'unchecked' }}
+                                        </label>
+                                    </div>
+
+                                    <div class="text-sm text-gray-600">
+                                        <span class="font-medium">Bound Property:</span>
+                                        <p class="mt-1"><code>[checked]="isChecked"</code></p>
+                                        <p>Value updates when property changes</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Range & Progress -->
+                        <div class="space-y-6">
+
+                            <!-- Range Slider -->
+                            <div
+                                class="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-200">
+                                <h3 class="font-bold text-gray-800 mb-4">Range Slider Binding</h3>
+
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                                            Value: {{ currentValue }} (Min: {{ minValue }}, Max: {{ maxValue }})
+                                        </label>
+
+                                        <input type="range" [min]="minValue" [max]="maxValue" [value]="currentValue"
+                                            [(ngModel)]="currentValue"
+                                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+
+                                        <!-- Progress bar representation -->
+                                        <div class="mt-3 bg-gray-200 rounded-full h-3">
+                                            <div [style.width.%]="progressValue"
+                                                class="bg-linear-to-r from-purple-500 to-pink-500 h-3 rounded-full transition-all duration-300">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <button (click)="currentValue = 0"
+                                            class="bg-purple-500 hover:bg-purple-600 text-white py-2 rounded-lg transition-colors">
+                                            Set to Min
+                                        </button>
+                                        <button (click)="currentValue = 100"
+                                            class="bg-pink-500 hover:bg-pink-600 text-white py-2 rounded-lg transition-colors">
+                                            Set to Max
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Link Binding -->
+                            <div
+                                class="bg-linear-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-200">
+                                <h3 class="font-bold text-gray-800 mb-4">Link Property Binding</h3>
+
+                                <div class="space-y-4">
+                                    <a [href]="websiteURL" [target]="linkTarget"
+                                        class="inline-flex items-center bg-linear-to-r from-amber-500 to-orange-500 text-white font-medium py-3 px-6 rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all duration-200">
+                                        <span class="mr-2">🌐</span>
+                                        {{ linkText }}
+                                    </a>
+
+                                    <div class="text-sm text-gray-600">
+                                        <span class="font-medium">Bound Properties:</span>
+                                        <p class="mt-1"><code>[href]="websiteURL"</code></p>
+                                        <p><code>[target]="linkTarget"</code> ({{ linkTarget }})</p>
+                                        <p class="mt-2">URL: {{ websiteURL }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Reference & Interactive Playground -->
+            <div>
+
+                <!-- Syntax Reference Card -->
+                <div
+                    class="bg-linear-to-br from-cyan-50 to-blue-50 rounded-2xl shadow-xl p-6 mb-8 border border-cyan-200">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">📚 Property Binding Syntax</h3>
+
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-3">
+                            <h4 class="font-bold text-blue-800 mb-2">Basic Syntax</h4>
+                            <pre class="text-xs bg-blue-50 p-2 rounded">
+  &lt;!-- Square brackets syntax --&gt;
+  &lt;element [property]="expression"&gt;
+  
+  &lt;!-- Examples --&gt;
+  &lt;div [contentEditable]="isEditable"&gt;&lt;/div&gt;
+  &lt;img [src]="imageUrl" [alt]="imageAlt"&gt;
+  &lt;button [disabled]="isDisabled"&gt;&lt;/button&gt;
+                </pre>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-3">
+                            <h4 class="font-bold text-blue-800 mb-2">Style Binding</h4>
+                            <pre class="text-xs bg-blue-50 p-2 rounded">
+  &lt;!-- Individual styles --&gt;
+  &lt;div [style.color]="textColor"&gt;&lt;/div&gt;
+  &lt;div [style.font-size.px]="fontSize"&gt;&lt;/div&gt;
+  
+  &lt;!-- Multiple styles --&gt;
+  &lt;div [style]="buttonStyles"&gt;&lt;/div&gt;
+  
+  &lt;!-- In TypeScript --&gt;
+  buttonStyles = {{ '{' }}
+    'background-color': buttonColor,
+    'color': 'white'
+  {{ '}' }};
+                </pre>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-3">
+                            <h4 class="font-bold text-blue-800 mb-2">Class Binding</h4>
+                            <pre class="text-xs bg-blue-50 p-2 rounded">
+  &lt;!-- Single class --&gt;
+  &lt;div [class.active]="isActive"&gt;&lt;/div&gt;
+  
+  &lt;!-- Multiple classes --&gt;
+  &lt;div [class]="getButtonClasses()"&gt;&lt;/div&gt;
+  
+  &lt;!-- Conditional classes --&gt;
+  &lt;div [class.bg-red-500]="hasError"&gt;&lt;/div&gt;
+                </pre>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-3">
+                            <h4 class="font-bold text-blue-800 mb-2">Attribute Binding</h4>
+                            <pre class="text-xs bg-blue-50 p-2 rounded">
+  &lt;!-- Standard attributes --&gt;
+  &lt;a [href]="url" [target]="target"&gt;&lt;/a&gt;
+  &lt;input [value]="text" 
+  [placeholder]="hint"&gt;
+  
+  &lt;!-- ARIA attributes --&gt;
+  &lt;button [attr.aria-label]="buttonLabel"&gt;
+  &lt;/button&gt;
+  
+  &lt;!-- Data attributes --&gt;
+  &lt;div [attr.data-id]="itemId"&gt;&lt;/div&gt;
+                </pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Playground -->
+                <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">🎮 Style Binding Playground</h3>
+
+                    <div class="space-y-6">
+
+                        <!-- Color Controls -->
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-gray-700">Color Controls</h4>
+
+                            <div class="grid gap-2">
+                                <button (click)="updateTextColor()"
+                                    class="bg-gray-800 hover:bg-gray-900 text-white py-2 rounded-lg transition-colors">
+                                    Random Text Color
+                                </button>
+                            </div>
+
+                            <button (click)="updateBackground()"
+                                class="w-full bg-linear-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white py-2 rounded-lg transition-colors">
+                                Random Background
+                            </button>
+                        </div>
+
+                        <!-- Size Controls -->
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-gray-700">Size Controls</h4>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <button (click)="increaseFontSize()"
+                                    class="bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition-colors">
+                                    Increase Font Size
+                                </button>
+                                <button (click)="decreaseFontSize()"
+                                    class="bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition-colors">
+                                    Decrease Font Size
+                                </button>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <button (click)="increaseBorderRadius()"
+                                    class="bg-amber-500 hover:bg-amber-600 text-white py-2 rounded-lg transition-colors">
+                                    Rounder Corners
+                                </button>
+                                <button (click)="decreaseBorderRadius()"
+                                    class="bg-amber-500 hover:bg-amber-600 text-white py-2 rounded-lg transition-colors">
+                                    Sharper Corners
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Preview Box -->
+                        <div class="mt-6">
+                            <h4 class="font-bold text-gray-700 mb-3">Live Preview</h4>
+
+                            <div [style]="editableDivStyles"
+                                class="p-4 border-2 border-dashed border-gray-300 rounded-lg text-center">
+                                <p class="font-bold">Preview Box</p>
+                                <p class="text-sm mt-2">Font Size: {{ fontSize }}px</p>
+                                <p class="text-sm">Border Radius: {{ borderRadius }}px</p>
+                                <p class="text-sm">Text Color: {{ textColor }}</p>
+                                <p class="text-sm">Background: {{ backgroundColor }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Differences -->
+                <div class="bg-gray-800 rounded-2xl shadow-xl p-6">
+                    <h3 class="text-xl font-bold text-white mb-4">🎯 Property vs Attribute</h3>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-300 mb-2">Property Binding</h4>
+                            <div class="bg-gray-900 rounded-lg p-4">
+                                <pre class="text-xs text-gray-300">
+  &lt;!-- Binds to DOM property --&gt;
+  &lt;input [value]="username"&gt;
+  &lt;button [disabled]="isDisabled"&gt;
+  
+  &lt;!-- Updates immediately --&gt;
+  &lt;!-- Handles booleans properly --&gt;
+  &lt;!-- TypeScript aware --&gt;
+                  </pre>
+                            </div>
+                            <p class="text-sm text-gray-300 mt-2">Binds to DOM object properties, not HTML attributes
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-gray-300 mb-2">Attribute Binding</h4>
+                            <div class="bg-gray-900 rounded-lg p-4">
+                                <pre class="text-xs text-gray-300">
+  &lt;!-- Binds to HTML attribute --&gt;
+  &lt;td [attr.colspan]="colspan"&gt;
+  &lt;div [attr.data-id]="itemId"&gt;
+  
+  &lt;!-- Use for non-standard attributes --&gt;
+  &lt;!-- ARIA attributes --&gt;
+  &lt;!-- Data attributes --&gt;
+                  </pre>
+                            </div>
+                            <p class="text-sm text-gray-300 mt-2">Use <code>[attr.]</code> prefix for HTML attributes
+                            </p>
+                        </div>
+
+                        <div class="text-sm text-gray-300">
+                            <p class="mb-2"><span class="font-bold text-green-400">✅ When to use Property
+                                    Binding:</span></p>
+                            <ul class="space-y-1 ml-4">
+                                <li>• DOM properties (value, disabled, checked)</li>
+                                <li>• Component properties</li>
+                                <li>• Style and class bindings</li>
+                                <li>• Most common use cases</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Real-World Examples -->
+        <div class="bg-linear-to-r from-blue-500 to-cyan-500 rounded-2xl shadow-xl p-6 md:p-8 mb-12">
+            <h2 class="text-2xl font-bold text-white mb-6">🌐 Real-World Examples</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+                    <div class="text-3xl mb-3">👤</div>
+                    <h3 class="font-bold text-white text-lg mb-2">User Avatar</h3>
+                    <p class="text-blue-100">
+                        <code>[src]="user.avatarUrl"</code><br>
+                        <code>[alt]="user.name"</code>
+                    </p>
+                </div>
+
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+                    <div class="text-3xl mb-3">🚦</div>
+                    <h3 class="font-bold text-white text-lg mb-2">Form Validation</h3>
+                    <p class="text-blue-100">
+                        <code>[disabled]="!form.valid"</code><br>
+                        <code>[class.error]="hasError"</code>
+                    </p>
+                </div>
+
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+                    <div class="text-3xl mb-3">🎨</div>
+                    <h3 class="font-bold text-white text-lg mb-2">Theme Switching</h3>
+                    <p class="text-blue-100">
+                        <code>[style.background]="theme.bgColor"</code><br>
+                        <code>[style.color]="theme.textColor"</code>
+                    </p>
+                </div>
+
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+                    <div class="text-3xl mb-3">📊</div>
+                    <h3 class="font-bold text-white text-lg mb-2">Data Visualization</h3>
+                    <p class="text-blue-100">
+                        <code>[style.width.%]="progress"</code><br>
+                        <code>[style.height.px]="barHeight"</code>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Common Properties Card -->
+            <div class="mt-8 bg-white/30 backdrop-blur-sm rounded-xl p-5">
+                <h3 class="font-bold text-white text-lg mb-3">🔧 Commonly Bound Properties:</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <h4 class="font-bold text-white mb-1">Form Controls</h4>
+                        <p class="text-blue-100 text-sm">value, disabled, checked, placeholder</p>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <h4 class="font-bold text-white mb-1">Media</h4>
+                        <p class="text-blue-100 text-sm">src, alt, poster, controls</p>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <h4 class="font-bold text-white mb-1">Links</h4>
+                        <p class="text-blue-100 text-sm">href, target, download</p>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <h4 class="font-bold text-white mb-1">Styles</h4>
+                        <p class="text-blue-100 text-sm">color, background, width, height</p>
+                    </div>
+                </div>
+            </div>
+        </div>
