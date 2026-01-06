@@ -1,0 +1,577 @@
+<!-- app.component.html -->
+<div class="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 p-4 md:p-8">
+
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto">
+
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                📥 Component Input Properties
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Learn how to pass data from parent to child components using &#64;Input()
+            </p>
+        </div>
+
+        <!-- Tutorial Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+
+            <!-- Left Column: Core Concepts -->
+            <div class="lg:col-span-2">
+
+                <!-- Demo Card 1: Basic Input Property -->
+                <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                    <div class="flex items-center mb-6">
+                        <div class="text-3xl mr-4">🎯</div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Basic Input Property</h2>
+                            <p class="text-gray-600">Passing data from parent to child</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <!-- Code Example -->
+                        <div class="bg-gray-900 rounded-xl p-5">
+                            <div class="flex items-center text-white mb-4">
+                                <div class="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                                <h3 class="font-semibold">Child Component (user.component.ts)</h3>
+                            </div>
+                            <pre class="text-sm text-gray-300 overflow-x-auto">
+  import {{ '{' }} input {{ '}' }} from '&#64;angular/core';
+  
+  export class UserComponent {{ '{' }}
+    // Define input property
+    name = input&lt;string&gt;();
+    
+    // Input with default value
+    occupation = input('Developer');
+    
+    // Use in template
+    // {{ '{{ name() }}' }} {{ '{{ occupation() }}' }}
+  {{ '}' }}
+                </pre>
+
+                            <div class="mt-6">
+                                <div class="flex items-center text-white mb-4">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <h3 class="font-semibold">Parent Component Template (app.component.html)</h3>
+                                </div>
+                                <pre class="text-sm text-gray-300 overflow-x-auto">
+  &lt;!-- Pass values to child --&gt;
+  &lt;app-user 
+    [name]="currentUserName"
+    [occupation]="currentUserOccupation"&gt;
+  &lt;/app-user&gt;
+  
+  &lt;!-- Direct string value --&gt;
+  &lt;app-user name="Simran"&gt;&lt;/app-user&gt;
+                  </pre>
+                            </div>
+                        </div>
+
+                        <!-- Live Demo -->
+                        <div>
+                            <div
+                                class="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl p-5 border border-blue-200 mb-6">
+                                <h3 class="font-bold text-gray-800 mb-4">Live Input Demo</h3>
+
+                                <!-- Interactive Controls -->
+                                <div class="space-y-4 mb-6">
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <button (click)="updateUserName()"
+                                            class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 rounded-lg transition-colors">
+                                            ✨ Random Name
+                                        </button>
+                                        <button (click)="updateUserOccupation()"
+                                            class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 rounded-lg transition-colors">
+                                            🎯 Random Job
+                                        </button>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <button (click)="toggleActive()"
+                                            [class]="currentUserActive ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'"
+                                            class="text-white font-medium py-2 rounded-lg transition-colors">
+                                            {{ currentUserActive ? '❌ Deactivate' : '✅ Activate' }}
+                                        </button>
+                                        <button (click)="increaseSalary()"
+                                            class="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 rounded-lg transition-colors">
+                                            💰 Increase Salary
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Current Data Display -->
+                                <div class="bg-white rounded-lg p-4 border border-blue-300">
+                                    <h4 class="font-bold text-gray-800 mb-3">Current Parent Data:</h4>
+                                    <div class="grid grid-cols-2 gap-3 text-sm">
+                                        <div>
+                                            <span class="text-gray-600">Name:</span>
+                                            <span class="font-medium ml-2">{{ currentUserName }}</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-gray-600">Occupation:</span>
+                                            <span class="font-medium ml-2">{{ currentUserOccupation }}</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-gray-600">Age:</span>
+                                            <span class="font-medium ml-2">{{ currentUserAge }}</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-gray-600">Salary:</span>
+                                            <span class="font-medium ml-2">${{ currentUserSalary }}</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-gray-600">Status:</span>
+                                            <span
+                                                [class]="'font-medium ml-2 ' + (currentUserActive ? 'text-green-600' : 'text-red-600')">
+                                                {{ currentUserActive ? 'Active' : 'Inactive' }}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Child Component Instance -->
+                            <div class="mt-6">
+                                <h4 class="font-bold text-gray-800 mb-3">Child Component Output:</h4>
+                                <app-user [name]="currentUserName" [occupation]="currentUserOccupation"
+                                    [age]="currentUserAge" [isActive]="currentUserActive" [salary]="currentUserSalary"
+                                    [address]="currentUserAddress" [skills]="currentUserSkills" [userId]="1001">
+                                </app-user>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demo Card 2: Multiple Instances -->
+                <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                    <div class="flex items-center mb-6">
+                        <div class="text-3xl mr-4">👥</div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Multiple Component Instances</h2>
+                            <p class="text-gray-600">Same component, different input data</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+
+                        <!-- Controls -->
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <h3 class="font-bold text-gray-800">User Team</h3>
+                                <p class="text-gray-600">{{ users.length }} team members</p>
+                            </div>
+                            <button (click)="addUser()"
+                                class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                                👤 Add New User
+                            </button>
+                        </div>
+
+                        <!-- User Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            @for (user of users; track user.id; let i = $index) {
+                            <div class="relative group">
+                                <!-- Remove Button -->
+                                <button (click)="removeUser(i)"
+                                    class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                                    ×
+                                </button>
+
+                                <!-- User Component -->
+                                <app-user [name]="user.name" [occupation]="user.occupation" [age]="user.age"
+                                    [isActive]="user.active" [salary]="user.salary" [userId]="user.id">
+                                </app-user>
+                            </div>
+                            }
+                        </div>
+
+                        <!-- Explanation -->
+                        <div class="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-200">
+                            <h4 class="font-bold text-gray-800 mb-3">💡 Key Insight:</h4>
+                            <p class="text-gray-700">
+                                Each <code>&lt;app-user&gt;</code> instance receives different input data but uses the
+                                same component logic.
+                                This demonstrates the power of reusable components with configurable inputs.
+                            </p>
+                            <div class="mt-3 text-sm text-gray-600">
+                                <p>Same component class + Different input values = Multiple unique instances</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demo Card 3: Advanced Input Features -->
+                <div class="bg-white rounded-2xl shadow-xl p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="text-3xl mr-4">⚡</div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Advanced Input Features</h2>
+                            <p class="text-gray-600">Required inputs, transforms, and complex types</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                        <!-- Required Inputs -->
+                        <div class="bg-linear-to-br from-amber-50 to-orange-50 rounded-xl p-5 border border-amber-200">
+                            <h3 class="font-bold text-gray-800 mb-4">Required Inputs</h3>
+
+                            <div class="space-y-4">
+                                <pre class="text-xs bg-amber-100 p-3 rounded-lg overflow-x-auto">
+  // Child component
+  userId = input.required&lt;number&gt;();
+  
+  // Parent MUST provide this
+  &lt;app-user [userId]="123"&gt;&lt;/app-user&gt;
+  
+  // TypeScript will enforce this
+  // Missing userId causes error
+                  </pre>
+
+                                <div class="text-sm text-gray-700">
+                                    <p>✅ <span class="font-medium">Required inputs</span> ensure parent components
+                                        provide essential data.</p>
+                                    <p class="mt-2">❌ Missing required inputs cause TypeScript compilation errors.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Input Transforms -->
+                        <div class="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
+                            <h3 class="font-bold text-gray-800 mb-4">Input Transforms</h3>
+
+                            <div class="space-y-4">
+                                <pre class="text-xs bg-green-100 p-3 rounded-lg overflow-x-auto">
+  // Transform input values
+  salary = input(0, {{ '{' }}
+    transform: (value: string | number) => {{ '{' }}
+      // Convert string to number
+      const num = typeof value === 'string' 
+        ? parseFloat(value) 
+        : value;
+      return Math.round(num);
+    {{ '}' }}
+  {{ '}' }});
+  
+  // Parent can pass string or number
+  &lt;app-user salary="85000"&gt;&lt;/app-user&gt;
+  &lt;app-user [salary]="85000"&gt;&lt;/app-user&gt;
+                  </pre>
+
+                                <div class="text-sm text-gray-700">
+                                    <p>🔄 <span class="font-medium">Transforms</span> allow data conversion/validation
+                                        on input.</p>
+                                    <p class="mt-2">🎯 Useful for formatting, validation, or type conversion.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Complex Types -->
+                        <div class="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl p-5 border border-blue-200">
+                            <h3 class="font-bold text-gray-800 mb-4">Complex Object Types</h3>
+
+                            <div class="space-y-4">
+                                <pre class="text-xs bg-blue-100 p-3 rounded-lg overflow-x-auto">
+  // Complex object type
+  address = input&lt;{{ '{' }}city: string, country: string{{ '}' }}&gt;({{ '{' }}
+    city: 'Unknown',
+    country: 'Unknown'
+  {{ '}' }});
+  
+  // Pass object from parent
+  currentUserAddress = {{ '{' }}
+    city: 'San Francisco',
+    country: 'USA'
+  {{ '}' }};
+  
+  &lt;app-user [address]="currentUserAddress"&gt;&lt;/app-user&gt;
+                  </pre>
+
+                                <div class="text-sm text-gray-700">
+                                    <p>🏢 <span class="font-medium">Objects</span> allow grouping related data together.
+                                    </p>
+                                    <p class="mt-2">📦 Pass complex data structures as single input.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Array Inputs -->
+                        <div class="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-200">
+                            <h3 class="font-bold text-gray-800 mb-4">Array Inputs</h3>
+
+                            <div class="space-y-4">
+                                <pre class="text-xs bg-purple-100 p-3 rounded-lg overflow-x-auto">
+  // Array type input
+  skills = input&lt;string[]&gt;([]);
+  
+  // Pass array from parent
+  currentSkills = ['Angular', 'TypeScript', 'RxJS'];
+  
+  &lt;app-user [skills]="currentSkills"&gt;&lt;/app-user&gt;
+  
+  // Use in child template
+  &#64; (skill of skills(); track $index) {{ '{' }}
+    &lt;span&gt;{{ '{{ skill }}' }}&lt;/span&gt;
+  {{ '}' }}
+                  </pre>
+
+                                <div class="text-sm text-gray-700">
+                                    <p>📋 <span class="font-medium">Arrays</span> allow passing lists of data.</p>
+                                    <p class="mt-2">🎨 Perfect for skills, tags, items, or any list data.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Reference & Playground -->
+            <div>
+
+                <!-- Syntax Reference Card -->
+                <div
+                    class="bg-linear-to-br from-cyan-50 to-blue-50 rounded-2xl shadow-xl p-6 mb-8 border border-cyan-200">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">📚 Input Syntax Reference</h3>
+
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-3">
+                            <h4 class="font-bold text-blue-800 mb-2">Basic Input</h4>
+                            <pre class="text-xs bg-blue-50 p-2 rounded">
+  // Child component
+  name = input&lt;string&gt;();
+  
+  // Parent template
+  &lt;app-child [name]="value"&gt;&lt;/app-child&gt;
+  
+  // Child template
+  {{ '{{ name() }}' }}
+                </pre>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-3">
+                            <h4 class="font-bold text-blue-800 mb-2">Default Value</h4>
+                            <pre class="text-xs bg-blue-50 p-2 rounded">
+  // With default value
+  title = input('Untitled');
+  
+  // Parent can override or omit
+  &lt;app-child&gt;&lt;/app-child&gt;
+  // Uses "Untitled"
+  
+  &lt;app-child [title]="'My Title'"&gt;&lt;/app-child&gt;
+  // Uses "My Title"
+                </pre>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-3">
+                            <h4 class="font-bold text-blue-800 mb-2">Required Input</h4>
+                            <pre class="text-xs bg-blue-50 p-2 rounded">
+  // Required input
+  id = input.required&lt;number&gt;();
+  
+  // Parent MUST provide
+  &lt;app-child [id]="123"&gt;&lt;/app-child&gt;
+  
+  // TypeScript error if missing
+                </pre>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-3">
+                            <h4 class="font-bold text-blue-800 mb-2">Input Transform</h4>
+                            <pre class="text-xs bg-blue-50 p-2 rounded">
+  // With transform
+  count = input(0, {{ '{' }}
+    transform: (value: string | number) => {{ '{' }}
+      return Number(value);
+    {{ '}' }}
+  {{ '}' }});
+  
+  // Parent can pass string
+  &lt;app-child count="42"&gt;&lt;/app-child&gt;
+  // Child receives number 42
+                </pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Playground -->
+                <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">🎮 Input Playground</h3>
+
+                    <div class="space-y-6">
+
+                        <!-- Direct String Input -->
+                        <div class="bg-linear-to-br from-green-50 to-emerald-50 rounded-lg p-4 border border-green-200">
+                            <h4 class="font-bold text-gray-800 mb-3">Direct String Value</h4>
+
+                            <app-user name="Simran" occupation="Angular Developer" [age]="29" [isActive]="true"
+                                [salary]="95000" [userId]="1002">
+                            </app-user>
+
+                            <div class="mt-3 text-sm text-gray-600">
+                                <p>Hard-coded string: <code>name="Simran"</code></p>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic Input -->
+                        <div class="bg-linear-to-br from-purple-50 to-pink-50 rounded-lg p-4 border border-purple-200">
+                            <h4 class="font-bold text-gray-800 mb-3">Dynamic Property Binding</h4>
+
+                            <app-user name="Dynamic User" occupation="Full Stack Developer" [age]="currentUserAge"
+                                [isActive]="currentUserActive" [salary]="currentUserSalary" [userId]="1003">
+                            </app-user>
+
+                            <div class="mt-3 text-sm text-gray-600">
+                                <p>Bound to parent properties: <code>[age]="currentUserAge"</code></p>
+                            </div>
+                        </div>
+
+                        <!-- Try It Yourself -->
+                        <div class="bg-linear-to-br from-amber-50 to-orange-50 rounded-lg p-4 border border-amber-200">
+                            <h4 class="font-bold text-gray-800 mb-3">💪 Try It Yourself</h4>
+
+                            <div class="space-y-3">
+                                <p class="text-sm text-gray-700">Create a new component with these inputs:</p>
+                                <ul class="text-sm text-gray-600 space-y-2 ml-4">
+                                    <li>• <code>title</code> (string, default: "Product")</li>
+                                    <li>• <code>price</code> (number, required)</li>
+                                    <li>• <code>onSale</code> (boolean, default: false)</li>
+                                    <li>• <code>colors</code> (string[], default: [])</li>
+                                </ul>
+
+                                <div class="text-xs text-gray-500 mt-2">
+                                    Hint: Use <code>input()</code> for each property
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Old vs New Syntax -->
+                <div class="bg-gray-800 rounded-2xl shadow-xl p-6">
+                    <h3 class="text-xl font-bold text-white mb-4">🆚 Old vs New Syntax</h3>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-300 mb-2">Old Syntax (Decorator)</h4>
+                            <div class="bg-gray-900 rounded-lg p-4">
+                                <pre class="text-xs text-gray-400">
+  // Angular 16 and earlier
+  import {{ '{' }} Component, Input {{ '}' }} from '&#64;angular/core';
+  
+  &#64;Component({{ '{' }}...{{ '}' }})
+  export class UserComponent {{ '{' }}
+  &#64;Input() name?: string;
+  &#64;Input() occupation = 'Developer';
+    
+    // Use directly in template
+    // {{ '{{ name }}' }}
+  {{ '}' }}
+                  </pre>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-gray-300 mb-2">New Syntax (Signal-based)</h4>
+                            <div class="bg-gray-900 rounded-lg p-4">
+                                <pre class="text-xs text-gray-300">
+// Angular 17+
+import {{ '{' }} Component, input {{ '}' }} 
+from '&#64;angular/core';
+  
+&#64;Component({{ '{' }}...{{ '}' }})
+  export class UserComponent {{ '{' }}
+    name = input&lt;string&gt;();
+    occupation = input('Developer');
+    
+    // Call as function in template
+    // {{ '{{ name() }}' }}
+  {{ '}' }}
+                  </pre>
+                            </div>
+                        </div>
+
+                        <div class="text-sm text-gray-300">
+                            <p class="mb-2"><span class="font-bold text-green-400">✅ Advantages of New Syntax:</span>
+                            </p>
+                            <ul class="space-y-1 ml-4">
+                                <li>• Better TypeScript support</li>
+                                <li>• Required inputs with <code>input.required()</code></li>
+                                <li>• Built-in transforms</li>
+                                <li>• Signals integration</li>
+                                <li>• No decorators needed</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Takeaways -->
+        <div class="bg-linear-to-r from-purple-500 to-pink-500 rounded-2xl shadow-xl p-6 md:p-8 mb-12">
+            <h2 class="text-2xl font-bold text-white mb-6">📚 Key Takeaways</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+                    <div class="text-3xl mb-3">📥</div>
+                    <h3 class="font-bold text-white text-lg mb-2">Input Definition</h3>
+                    <p class="text-purple-100">
+                        Use <code>input()</code> function to define properties that receive data from parent components.
+                    </p>
+                </div>
+
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+                    <div class="text-3xl mb-3">🔗</div>
+                    <h3 class="font-bold text-white text-lg mb-2">Property Binding</h3>
+                    <p class="text-purple-100">
+                        Parent passes data using <code>[property]="value"</code> syntax in template.
+                    </p>
+                </div>
+
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+                    <div class="text-3xl mb-3">⚡</div>
+                    <h3 class="font-bold text-white text-lg mb-2">Signal-based</h3>
+                    <p class="text-purple-100">
+                        Inputs return signals. Access values with <code>property()</code> function call.
+                    </p>
+                </div>
+
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+                    <div class="text-3xl mb-3">🎯</div>
+                    <h3 class="font-bold text-white text-lg mb-2">Reusability</h3>
+                    <p class="text-purple-100">
+                        Same component can be used multiple times with different input data.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Real-World Examples -->
+            <div class="mt-8 bg-white/30 backdrop-blur-sm rounded-xl p-5">
+                <h3 class="font-bold text-white text-lg mb-3">🌐 Real-World Examples:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <h4 class="font-bold text-white mb-1">Product Card</h4>
+                        <p class="text-purple-100 text-sm"><code>[product]</code>, <code>[price]</code>,
+                            <code>[image]</code>
+                        </p>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <h4 class="font-bold text-white mb-1">User Profile</h4>
+                        <p class="text-purple-100 text-sm"><code>[user]</code>, <code>[showEmail]</code>,
+                            <code>[theme]</code>
+                        </p>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <h4 class="font-bold text-white mb-1">Data Table</h4>
+                        <p class="text-purple-100 text-sm"><code>[data]</code>, <code>[columns]</code>,
+                            <code>[pagination]</code>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

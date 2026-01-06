@@ -1,0 +1,86 @@
+<!-- user.component.html -->
+<div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+
+    <!-- Header with name and status -->
+    <div class="flex items-center justify-between mb-6">
+        <div>
+            <h2 class="text-2xl font-bold text-gray-800">
+                {{ name() || 'Anonymous User' }}
+            </h2>
+            <p class="text-gray-600">ID: {{ userId() }}</p>
+        </div>
+
+        <div class="flex items-center">
+            <div [class]="'w-3 h-3 rounded-full mr-2 ' + (isActive() ? 'bg-green-500 animate-pulse' : 'bg-red-500')">
+            </div>
+            <span [class]="'font-medium ' + statusColor">
+                {{ statusText }}
+            </span>
+        </div>
+    </div>
+
+    <!-- User Information Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-1 gap-4 mb-6">
+
+        <!-- Occupation -->
+        <div class="bg-blue-50 rounded-lg p-4">
+            <div class="text-sm text-blue-700 font-medium mb-1">Occupation</div>
+            <div class="text-lg font-bold text-blue-800">{{ occupation() }}</div>
+        </div>
+
+        <!-- Age -->
+        <div class="bg-green-50 rounded-lg p-4">
+            <div class="text-sm text-green-700 font-medium mb-1">Age</div>
+            <div class="text-lg font-bold text-green-800">{{ age() }} years</div>
+        </div>
+
+        <!-- Salary -->
+        <div class="bg-purple-50 rounded-lg p-4">
+            <div class="text-sm text-purple-700 font-medium mb-1">Salary</div>
+            <div class="text-lg font-bold text-purple-800">{{ formattedSalary }}/year</div>
+        </div>
+
+        <!-- Location -->
+        <div class="bg-amber-50 rounded-lg p-4">
+            <div class="text-sm text-amber-700 font-medium mb-1">Location</div>
+            <div class="text-lg font-bold text-amber-800">{{ getLocation() }}</div>
+        </div>
+    </div>
+
+    <!-- Skills Section -->
+    @if (skills().length > 0) {
+    <div class="mb-6">
+        <h3 class="font-bold text-gray-800 mb-3">Skills & Expertise</h3>
+        <div class="flex flex-wrap gap-2">
+            @for (skill of skills(); track $index) {
+            <span
+                class="bg-linear-to-r from-blue-500 to-blue-600 text-white text-sm font-medium px-3 py-1 rounded-full">
+                {{ skill }}
+            </span>
+            }
+        </div>
+    </div>
+    }
+
+    <!-- Summary -->
+    <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+        <h4 class="font-bold text-gray-800 mb-2">User Summary</h4>
+        <p class="text-gray-700">{{ userInfo }}</p>
+        <p class="text-sm text-gray-600 mt-2">This data was passed from parent component via &#64;Input()</p>
+    </div>
+
+    <!-- Input Details (for learning) -->
+    <div class="mt-6 pt-6 border-t border-gray-200">
+        <h4 class="font-bold text-gray-800 mb-3">📦 Input Properties Used:</h4>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-gray-100 p-2 rounded">name()</div>
+            <div class="bg-gray-100 p-2 rounded">occupation()</div>
+            <div class="bg-gray-100 p-2 rounded">age()</div>
+            <div class="bg-gray-100 p-2 rounded">isActive()</div>
+            <div class="bg-gray-100 p-2 rounded">salary()</div>
+            <div class="bg-gray-100 p-2 rounded">address()</div>
+            <div class="bg-gray-100 p-2 rounded">skills()</div>
+            <div class="bg-gray-100 p-2 rounded">userId()</div>
+        </div>
+    </div>
+</div>

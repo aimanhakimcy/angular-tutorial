@@ -33,5 +33,9 @@ export const routes: Routes = [
         path: 'event-handling',
         loadComponent: () => import('./features/event-handling/event-handling.component').then(m => m.EventHandlingComponent),
     },
+    {
+        path: 'component-input',
+        loadComponent: () => import('./features/component-input/component-input.component').then(m => m.ComponentInputComponent),
+    },
     { path: '**', redirectTo: '' }
 ];
