@@ -17,5 +17,9 @@ export const routes: Routes = [
         path: 'component-composition',
         loadComponent: () => import('./features/component-composition/component-composition.component').then(m => m.ComponentCompositionComponent),
     },
+    {
+        path: 'control-flow',
+        loadComponent: () => import('./features/control-flow/control-flow.component').then(m => m.ControlFlowComponent),
+    },
     { path: '**', redirectTo: '' }
 ];

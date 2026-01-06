@@ -1,0 +1,666 @@
+<!-- server-status.component.html -->
+<div class="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 p-4 md:p-8">
+
+    <!-- Main Container -->
+    <div class="max-w-6xl mx-auto">
+
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                ⚡ Control Flow with &#64;if
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Learn how to conditionally render content in Angular templates using &#64;if
+            </p>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+
+            <!-- Left Column: Basic @if Examples -->
+            <div class="lg:col-span-2">
+
+                <!-- Demo Card 1: Basic @if -->
+                <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                    <div class="flex items-center mb-6">
+                        <div class="text-3xl mr-4">🎯</div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">Basic &#64;if Example</h2>
+                            <p class="text-gray-600">The foundation of conditional rendering</p>
+                        </div>
+                    </div>
+
+                    <!-- Example 1: Simple @if -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <!-- Code Example -->
+                        <div class="bg-gray-900 rounded-xl p-5">
+                            <div class="flex items-center text-white mb-4">
+                                <div class="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                                <h3 class="font-semibold">TypeScript Property</h3>
+                            </div>
+                            <pre class="text-sm text-gray-300 overflow-x-auto">
+  export class ServerStatusComponent {{ '{' }}
+    isServerRunning = true;
+  {{ '}' }}
+                </pre>
+
+                            <div class="mt-6">
+                                <div class="flex items-center text-white mb-4">
+                                    <div class="w-3 h-3 rounded-full bg-green-500 mr-2"></div>
+                                    <h3 class="font-semibold">HTML Template with &#64;if</h3>
+                                </div>
+                                <pre class="text-sm text-gray-300 overflow-x-auto">
+  &lt;!-- Simple &#64;if --&gt;
+  &#64;if (isServerRunning) {{ '{' }}
+    &lt;p&gt;Yes, the server is running&lt;/p&gt;
+  {{ '}' }}
+  
+  &lt;!-- &#64;if with &#64;else --&gt;
+  &#64;if (isServerRunning) {{ '{' }}
+    &lt;p&gt;✅ Server is running&lt;/p&gt;
+  {{ '}' }} &#64;else {{ '{' }}
+    &lt;p&gt;❌ Server is not running&lt;/p&gt;
+  {{ '}' }}
+                  </pre>
+                            </div>
+                        </div>
+
+                        <!-- Live Demo -->
+                        <div>
+                            <div class="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl p-5 border border-blue-200">
+                                <h3 class="font-bold text-gray-800 mb-4">Live Demo</h3>
+
+                                <!-- Simple @if -->
+                                <div class="mb-6">
+                                    <p class="text-sm text-gray-600 mb-2">Simple &#64;if statement:</p>
+                                    @if (isServerRunning) {
+                                    <div class="bg-green-100 border border-green-300 rounded-lg p-4">
+                                        <div class="flex items-center">
+                                            <div class="w-3 h-3 bg-green-500 rounded-full mr-3 animate-pulse"></div>
+                                            <span class="font-bold text-green-800">Yes, the server is running!</span>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+
+                                <!-- @if with @else -->
+                                <div>
+                                    <p class="text-sm text-gray-600 mb-2">&#64;if with &#64;else:</p>
+                                    @if (isServerRunning) {
+                                    <div class="bg-green-100 border border-green-300 rounded-lg p-4">
+                                        <div class="flex items-center">
+                                            <span class="text-2xl mr-3">✅</span>
+                                            <span class="font-bold text-green-800">Server is running</span>
+                                        </div>
+                                    </div>
+                                    } @else {
+                                    <div class="bg-red-100 border border-red-300 rounded-lg p-4">
+                                        <div class="flex items-center">
+                                            <span class="text-2xl mr-3">❌</span>
+                                            <span class="font-bold text-red-800">Server is not running</span>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+
+                                <!-- Toggle Button -->
+                                <button (click)="toggleServerStatus()"
+                                    class="w-full mt-6 bg-linear-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:-translate-y-0.5">
+                                    Toggle Server Status
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demo Card 2: @if with @else if -->
+                <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                    <div class="flex items-center mb-6">
+                        <div class="text-3xl mr-4">🔄</div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">&#64;if, &#64;else if, &#64;else</h2>
+                            <p class="text-gray-600">Multiple condition handling</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <!-- Code Example -->
+                        <div class="bg-gray-900 rounded-xl p-5">
+                            <div class="flex items-center text-white mb-4">
+                                <div class="w-3 h-3 rounded-full bg-purple-500 mr-2"></div>
+                                <h3 class="font-semibold">Multiple Conditions</h3>
+                            </div>
+                            <pre class="text-sm text-gray-300 overflow-x-auto">
+  &lt;!-- Multiple conditions --&gt;
+  &#64;if (serverLoad > 80) {{ '{' }}
+    &lt;span class="text-red-600"&gt;High Load!&lt;/span&gt;
+  {{ '}' }} &#64;else if (serverLoad > 50) {{ '{' }}
+    &lt;span class="text-yellow-600"&gt;Medium Load&lt;/span&gt;
+  {{ '}' }} &#64;else {{ '{' }}
+    &lt;span class="text-green-600"&gt;Low Load&lt;/span&gt;
+  {{ '}' }}
+  
+  &lt;!-- Complex conditions --&gt;
+  &#64;if (isLoggedIn && hasAdminAccess) {{ '{' }}
+    &lt;button&gt;Admin Dashboard&lt;/button&gt;
+  {{ '}' }}
+                </pre>
+                        </div>
+                        <!-- Live Demo -->
+                        <div class="space-y-6">
+
+                            <!-- Server Load Example -->
+                            <div
+                                class="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-200">
+                                <h4 class="font-bold text-gray-800 mb-3">Server Load Status</h4>
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-gray-700">Current Load: {{ serverLoad }}%</span>
+                                    <div class="w-24 bg-gray-200 rounded-full h-2">
+                                        <div [style.width.%]="serverLoad"
+                                            [class]="serverLoad > 80 ? 'bg-red-500' : serverLoad > 50 ? 'bg-yellow-500' : 'bg-green-500'"
+                                            class="h-2 rounded-full transition-all duration-500"></div>
+                                    </div>
+                                </div>
+
+                                <!-- @if @else if @else chain -->
+                                <div class="text-center">
+                                    @if (serverLoad > 80) {
+                                    <div class="bg-red-100 text-red-800 rounded-lg p-3 font-bold">
+                                        ⚠️ High Server Load!
+                                    </div>
+                                    } @else if (serverLoad > 50) {
+                                    <div class="bg-yellow-100 text-yellow-800 rounded-lg p-3 font-bold">
+                                        ⚡ Medium Server Load
+                                    </div>
+                                    } @else {
+                                    <div class="bg-green-100 text-green-800 rounded-lg p-3 font-bold">
+                                        ✅ Low Server Load
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- User Access Example -->
+                            <div
+                                class="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
+                                <h4 class="font-bold text-gray-800 mb-3">User Access Control</h4>
+
+                                <!-- Toggle Controls -->
+                                <div class="flex space-x-2 mb-4">
+                                    <button (click)="toggleLoginStatus()"
+                                        [class]="isLoggedIn ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-500 hover:bg-gray-600'"
+                                        class="text-white px-3 py-1 rounded-lg text-sm transition-colors">
+                                        {{ isLoggedIn ? '✅ Logged In' : '❌ Logged Out' }}
+                                    </button>
+                                    <button (click)="toggleAdminAccess()"
+                                        [class]="hasAdminAccess ? 'bg-purple-500 hover:bg-purple-600' : 'bg-gray-500 hover:bg-gray-600'"
+                                        class="text-white px-3 py-1 rounded-lg text-sm transition-colors">
+                                        {{ hasAdminAccess ? '👑 Admin Access' : '👤 User Access' }}
+                                    </button>
+                                </div>
+
+                                <!-- Conditional Content -->
+                                <div class="space-y-3">
+                                    @if (isLoggedIn && hasAdminAccess) {
+                                    <div class="bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-lg p-4">
+                                        <div class="flex items-center">
+                                            <span class="text-2xl mr-3">👑</span>
+                                            <div>
+                                                <h5 class="font-bold">Welcome, Admin {{ userName }}!</h5>
+                                                <p class="text-purple-100 text-sm">You have full system access</p>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3 grid grid-cols-2 gap-2">
+                                            <button
+                                                class="bg-white/20 hover:bg-white/30 rounded px-3 py-2 text-sm">Manage
+                                                Users</button>
+                                            <button class="bg-white/20 hover:bg-white/30 rounded px-3 py-2 text-sm">View
+                                                Logs</button>
+                                        </div>
+                                    </div>
+                                    } @else if (isLoggedIn) {
+                                    <div class="bg-linear-to-r from-blue-500 to-cyan-500 text-white rounded-lg p-4">
+                                        <div class="flex items-center">
+                                            <span class="text-2xl mr-3">👤</span>
+                                            <div>
+                                                <h5 class="font-bold">Welcome, {{ userName }}!</h5>
+                                                <p class="text-blue-100 text-sm">You have user-level access</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    } @else {
+                                    <div class="bg-linear-to-r from-gray-500 to-gray-600 text-white rounded-lg p-4">
+                                        <div class="flex items-center">
+                                            <span class="text-2xl mr-3">🔒</span>
+                                            <div>
+                                                <h5 class="font-bold">Please Log In</h5>
+                                                <p class="text-gray-200 text-sm">You need to log in to access the system
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <button class="w-full mt-3 bg-white text-gray-800 font-medium py-2 rounded-lg">
+                                            Login
+                                        </button>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demo Card 3: @if with Arrays -->
+                <div class="bg-white rounded-2xl shadow-xl p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="text-3xl mr-4">📊</div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800">&#64;if with Data Arrays</h2>
+                            <p class="text-gray-600">Conditional rendering based on data</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+
+                        <!-- Server Status Dashboard -->
+                        <div class="bg-linear-to-br from-indigo-50 to-blue-50 rounded-xl p-6 border border-indigo-200">
+                            <div class="flex justify-between items-center mb-6">
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-lg">Server Dashboard</h4>
+                                    <p class="text-gray-600 text-sm">{{ servers.length }} total servers</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-2xl font-bold text-green-600">{{ runningServersCount }} Running
+                                    </div>
+                                    <div class="text-sm text-gray-600">Avg Load: {{ averageServerLoad.toFixed(1) }}%
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Server List -->
+                            <div class="space-y-4">
+                                @for (server of servers; track server.id) {
+                                <div
+                                    class="bg-white rounded-lg p-4 border border-gray-200 hover:border-indigo-300 transition-colors">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <span class="text-2xl mr-3">{{ getStatusEmoji(server.status) }}</span>
+                                            <div>
+                                                <h5 class="font-bold text-gray-800">{{ server.name }}</h5>
+                                                <p class="text-sm text-gray-600">{{ server.location }}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center space-x-4">
+                                            <!-- Status Badge -->
+                                            <span
+                                                [class]="getStatusColor(server.status) + ' text-xs font-medium px-3 py-1 rounded-full'">
+                                                {{ server.status.toUpperCase() }}
+                                            </span>
+
+                                            <!-- Load Indicator -->
+                                            <div class="text-right">
+                                                <div class="font-bold">{{ server.load }}%</div>
+                                                <div class="text-xs text-gray-500">Load</div>
+                                            </div>
+
+                                            <!-- Restart Button (only for non-running) -->
+                                            @if (server.status !== 'running') {
+                                            <button (click)="restartServer(server.id)"
+                                                class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg text-sm transition-colors">
+                                                Restart
+                                            </button>
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <!-- Warning for high load -->
+                                    @if (server.status === 'running' && server.load > 70) {
+                                    <div
+                                        class="mt-3 bg-yellow-50 border border-yellow-200 rounded-lg p-3 flex items-center">
+                                        <span class="text-yellow-600 mr-2">⚠️</span>
+                                        <span class="text-sm text-yellow-800">High load detected on {{ server.name
+                                            }}</span>
+                                    </div>
+                                    }
+
+                                    <!-- Maintenance notice -->
+                                    @if (server.status === 'maintenance') {
+                                    <div class="mt-3 bg-blue-50 border border-blue-200 rounded-lg p-3">
+                                        <p class="text-sm text-blue-800">Maintenance scheduled. Expected downtime: 2
+                                            hours</p>
+                                    </div>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <!-- Empty State -->
+                            @if (servers.length === 0) {
+                            <div class="text-center py-8">
+                                <div class="text-4xl mb-4">📭</div>
+                                <h5 class="font-bold text-gray-800">No Servers Found</h5>
+                                <p class="text-gray-600">Add servers to get started</p>
+                            </div>
+                            }
+                        </div>
+
+                        <!-- Server Stats with @if -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- Only show if server is running -->
+                            @if (isServerRunning) {
+                            <div
+                                class="bg-linear-to-br from-green-50 to-emerald-50 rounded-xl p-5 border border-green-200">
+                                <div class="text-2xl font-bold text-green-600">{{ serverUptime }}%</div>
+                                <p class="text-gray-700">Server Uptime</p>
+                            </div>
+                            }
+
+                            <!-- Always show -->
+                            <div class="bg-linear-to-br from-blue-50 to-cyan-50 rounded-xl p-5 border border-blue-200">
+                                <div class="text-2xl font-bold text-blue-600">{{ activeConnections }}</div>
+                                <p class="text-gray-700">Active Connections</p>
+                            </div>
+
+                            <!-- Conditional message -->
+                            <div
+                                class="bg-linear-to-br from-purple-50 to-pink-50 rounded-xl p-5 border border-purple-200">
+                                @if (lastBackup.getTime() > Date.now() - 86400000) {
+                                <div class="flex items-center">
+                                    <span class="text-green-500 mr-2">✅</span>
+                                    <div>
+                                        <div class="font-bold text-gray-800">Backup Recent</div>
+                                        <p class="text-sm text-gray-600">Last: {{ lastBackup | date:'short' }}</p>
+                                    </div>
+                                </div>
+                                } @else {
+                                <div class="flex items-center">
+                                    <span class="text-red-500 mr-2">⚠️</span>
+                                    <div>
+                                        <div class="font-bold text-gray-800">Backup Needed</div>
+                                        <p class="text-sm text-gray-600">Last: {{ lastBackup | date:'short' }}</p>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Reference & Practice -->
+            <div>
+
+                <!-- Quick Reference Card -->
+                <div
+                    class="bg-linear-to-br from-amber-50 to-orange-50 rounded-2xl shadow-xl p-6 mb-8 border border-amber-200">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">📚 &#64;if Syntax Reference</h3>
+
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-lg p-3">
+                            <h4 class="font-bold text-amber-800 mb-2">Basic &#64;if</h4>
+                            <pre class="text-xs bg-amber-50 p-2 rounded">
+&#64;if (condition) {{ '{' }}
+    // Content when true
+  {{ '}' }}
+                </pre>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-3">
+                            <h4 class="font-bold text-amber-800 mb-2">&#64;if with &#64;else</h4>
+                            <pre class="text-xs bg-amber-50 p-2 rounded">
+&#64;if (condition) {{ '{' }}
+    // When true
+  {{ '}' }} &#64;else {{ '{' }}
+    // When false
+  {{ '}' }}
+                </pre>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-3">
+                            <h4 class="font-bold text-amber-800 mb-2">&#64;if with &#64;else if</h4>
+                            <pre class="text-xs bg-amber-50 p-2 rounded">
+&#64;if (condition1) {{ '{' }}
+    // When condition1 true
+  {{ '}' }} &#64;else if (condition2) {{ '{' }}
+    // When condition2 true
+  {{ '}' }} &#64;else {{ '{' }}
+    // When all false
+  {{ '}' }}
+                </pre>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-3">
+                            <h4 class="font-bold text-amber-800 mb-2">Multiple Conditions</h4>
+                            <pre class="text-xs bg-amber-50 p-2 rounded">
+  &#64;if (isLoggedIn && hasAccess) {{ '{' }}
+    // When both true
+  {{ '}' }}
+  
+  &#64;if (isAdmin || isModerator) {{ '{' }}
+    // When either true
+  {{ '}' }}
+                </pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Practice Card -->
+                <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">💪 Practice Area</h3>
+
+                    <div class="space-y-6">
+                        <!-- Challenge 1 -->
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Challenge 1: Maintenance Mode</h4>
+                            <p class="text-sm text-gray-600 mb-3">Toggle maintenance mode and see the changes:</p>
+                            <button (click)="toggleMaintenanceMode()"
+                                [class]="maintenanceMode ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'"
+                                class="w-full text-white font-medium py-2 rounded-lg transition-colors mb-3">
+                                {{ maintenanceMode ? 'Disable Maintenance' : 'Enable Maintenance' }}
+                            </button>
+
+                            @if (maintenanceMode) {
+                            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                                <div class="flex items-center">
+                                    <span class="text-2xl mr-3">🚧</span>
+                                    <div>
+                                        <h5 class="font-bold text-red-800">Maintenance Active</h5>
+                                        <p class="text-sm text-red-700">System is under maintenance</p>
+                                    </div>
+                                </div>
+                            </div>
+                            } @else {
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                <div class="flex items-center">
+                                    <span class="text-2xl mr-3">✅</span>
+                                    <div>
+                                        <h5 class="font-bold text-green-800">System Operational</h5>
+                                        <p class="text-sm text-green-700">All systems are running normally</p>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        </div>
+
+                        <!-- Challenge 2 -->
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Challenge 2: Notifications</h4>
+                            <p class="text-sm text-gray-600 mb-3">Conditional notification display:</p>
+
+                            @if (notificationsCount > 0) {
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <span class="text-2xl mr-3">🔔</span>
+                                        <div>
+                                            <h5 class="font-bold text-blue-800">{{ notificationsCount }} New
+                                                Notifications</h5>
+                                            <p class="text-sm text-blue-700">You have unread messages</p>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="bg-blue-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
+                                        {{ notificationsCount }}
+                                    </span>
+                                </div>
+                            </div>
+                            } @else {
+                            <div class="bg-gray-100 rounded-lg p-4 text-center">
+                                <span class="text-gray-500">No new notifications</span>
+                            </div>
+                            }
+                        </div>
+
+                        <!-- Challenge 3 -->
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-bold text-gray-800 mb-2">Challenge 3: Complex Condition</h4>
+                            <p class="text-sm text-gray-600 mb-3">Try this complex condition:</p>
+
+                            @if (isLoggedIn && userRole === 'Developer' && isServerRunning) {
+                            <div class="bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-lg p-4">
+                                <div class="flex items-center">
+                                    <span class="text-2xl mr-3">🚀</span>
+                                    <div>
+                                        <h5 class="font-bold">Developer Access Granted!</h5>
+                                        <p class="text-purple-100 text-sm">Full system access available</p>
+                                    </div>
+                                </div>
+                            </div>
+                            } @else if (isLoggedIn && isServerRunning) {
+                            <div class="bg-linear-to-r from-blue-500 to-cyan-500 text-white rounded-lg p-4">
+                                <div class="flex items-center">
+                                    <span class="text-2xl mr-3">👤</span>
+                                    <div>
+                                        <h5 class="font-bold">User Access Active</h5>
+                                        <p class="text-blue-100 text-sm">Standard access available</p>
+                                    </div>
+                                </div>
+                            </div>
+                            } @else {
+                            <div class="bg-linear-to-r from-gray-500 to-gray-600 text-white rounded-lg p-4">
+                                <div class="flex items-center">
+                                    <span class="text-2xl mr-3">🔒</span>
+                                    <div>
+                                        <h5 class="font-bold">Access Restricted</h5>
+                                        <p class="text-gray-200 text-sm">Check login or server status</p>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparison Card -->
+                <div class="bg-gray-800 rounded-2xl shadow-xl p-6">
+                    <h3 class="text-xl font-bold text-white mb-4">🆚 Old vs New Syntax</h3>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-300 mb-2">Old Syntax (v16 and earlier)</h4>
+                            <div class="bg-gray-900 rounded-lg p-4">
+                                <pre class="text-xs text-gray-400">
+&lt;div *ngIf="isServerRunning; 
+  else serverDown"&gt;
+    &lt;p&gt;Server is running&lt;/p&gt;
+  &lt;/div&gt;
+  
+  &lt;ng-template #serverDown&gt;
+    &lt;p&gt;Server is not running&lt;/p&gt;
+  &lt;/ng-template&gt;
+                  </pre>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="font-semibold text-gray-300 mb-2">New Syntax (v17+)</h4>
+                            <div class="bg-gray-900 rounded-lg p-4">
+                                <pre class="text-xs text-gray-300">
+&#64;if (isServerRunning) {{ '{' }}
+&lt;p&gt;Server is running&lt;/p&gt;
+  {{ '}' }} &#64;else {{ '{' }}
+    &lt;p&gt;Server is not running&lt;/p&gt;
+  {{ '}' }}
+                  </pre>
+                            </div>
+                        </div>
+
+                        <div class="text-sm text-gray-300">
+                            <p class="mb-2"><span class="font-bold text-green-400">✅ Advantages:</span></p>
+                            <ul class="space-y-1 ml-4">
+                                <li>• More intuitive syntax</li>
+                                <li>• Better TypeScript support</li>
+                                <li>• No need for ng-template</li>
+                                <li>• Direct &#64;else support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Takeaways -->
+        <div class="bg-linear-to-r from-blue-500 to-cyan-500 rounded-2xl shadow-xl p-6 md:p-8">
+            <h2 class="text-2xl font-bold text-white mb-6">📚 Key Takeaways</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+                    <div class="text-3xl mb-3">🎯</div>
+                    <h3 class="font-bold text-white text-lg mb-2">&#64;if Statement</h3>
+                    <p class="text-blue-100">
+                        Use <code class="bg-white/20 px-2 py-1 rounded">&#64;if (condition)</code> to conditionally render
+                        content based on boolean values.
+                    </p>
+                </div>
+
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+                    <div class="text-3xl mb-3">🔄</div>
+                    <h3 class="font-bold text-white text-lg mb-2">&#64;else Chains</h3>
+                    <p class="text-blue-100">
+                        Chain conditions with <code class="bg-white/20 px-2 py-1 rounded">&#64;else if</code> and <code
+                            class="bg-white/20 px-2 py-1 rounded">&#64;else</code> for multiple scenarios.
+                    </p>
+                </div>
+
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+                    <div class="text-3xl mb-3">⚡</div>
+                    <h3 class="font-bold text-white text-lg mb-2">Complex Conditions</h3>
+                    <p class="text-blue-100">
+                        Combine conditions with <code class="bg-white/20 px-2 py-1 rounded">&&</code> (AND) and <code
+                            class="bg-white/20 px-2 py-1 rounded">||</code> (OR) operators.
+                    </p>
+                </div>
+
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-5">
+                    <div class="text-3xl mb-3">🚀</div>
+                    <h3 class="font-bold text-white text-lg mb-2">Automatic Updates</h3>
+                    <p class="text-blue-100">
+                        When conditions change, Angular automatically updates the view. No manual DOM manipulation
+                        needed!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Real-World Example -->
+            <div class="mt-8 bg-white/30 backdrop-blur-sm rounded-xl p-5">
+                <h3 class="font-bold text-white text-lg mb-3">🌐 Real-World Use Cases:</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <h4 class="font-bold text-white mb-1">Authentication</h4>
+                        <p class="text-blue-100 text-sm">Show different UI for logged in vs logged out users</p>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <h4 class="font-bold text-white mb-1">Feature Flags</h4>
+                        <p class="text-blue-100 text-sm">Enable/disable features based on user roles or settings</p>
+                    </div>
+                    <div class="bg-white/20 rounded-lg p-3">
+                        <h4 class="font-bold text-white mb-1">Loading States</h4>
+                        <p class="text-blue-100 text-sm">Show loading spinners while data is being fetched</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
